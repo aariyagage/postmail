@@ -1,0 +1,770 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Subtle aged paper texture */
+    background-image:
+      radial-gradient(ellipse at 15% 10%, rgba(210, 195, 170, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 80%, rgba(200, 185, 160, 0.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(220, 210, 190, 0.08) 0%, transparent 60%);
+  }
+
+  ::selection {
+    background: #3a2a1a;
+    color: #f5f0e8;
+  }
+}
+
+@layer components {
+  .rule-hairline {
+    @apply border-b border-rule-light;
+    border-bottom-width: 0.5px;
+  }
+
+  .rule-thick {
+    @apply border-b-thick border-rule;
+  }
+
+  .rule-double {
+    border-bottom: 3px double theme("colors.rule.DEFAULT");
+  }
+
+  .rule-dashed {
+    @apply border-b border-dashed border-rule-light;
+  }
+
+  .pull-quote {
+    @apply font-headline text-xl italic leading-snug text-ink;
+    @apply pl-5 my-6;
+    border-left: 2px solid var(--pull-quote-color, #1a1a1a);
+  }
+
+  .label {
+    @apply font-mono text-[11px] lowercase tracking-wide text-ink-muted;
+  }
+
+  .section-label {
+    @apply font-mono text-[11px] lowercase text-ink-muted;
+  }
+
+  .section-label::before {
+    content: "(";
+  }
+
+  .section-label::after {
+    content: ")";
+  }
+
+  .dateline {
+    @apply font-mono text-[11px] text-ink-muted;
+  }
+
+  .kicker {
+    @apply font-mono text-[11px] lowercase text-ink-muted;
+  }
+
+  /* Marker highlight — like a real highlighter was dragged across */
+  .highlight {
+    background: linear-gradient(transparent 55%, var(--highlight-color, #f2ebe0) 55%, var(--highlight-color, #f2ebe0) 90%, transparent 90%);
+    padding: 0 2px;
+  }
+
+  /* Dot grid background — journal/graph paper feel */
+  .dot-grid {
+    background-image: radial-gradient(circle, #d4d4d4 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+  }
+
+  /* Ruled lines background */
+  .ruled-lines {
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      #e8e5e0 27px,
+      #e8e5e0 28px
+    );
+  }
+
+  /* Decorative asterisk divider */
+  .divider-asterisk {
+    @apply text-center text-ink-muted my-8;
+  }
+
+  .divider-asterisk::before {
+    content: "* * *";
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+  }
+
+  .column-layout {
+    @apply grid gap-gutter;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  /* ============================================================
+     VINTAGE POSTAL — ink bleed, wax seals, stamps, envelopes
+     ============================================================ */
+
+  /* --- Ink bleed effect on headlines --- */
+  .ink-bleed {
+    text-shadow:
+      0.3px 0 0.4px rgba(26, 26, 26, 0.12),
+      -0.2px 0 0.3px rgba(26, 26, 26, 0.08),
+      0 0.2px 0.5px rgba(26, 26, 26, 0.06);
+  }
+
+  /* Heavier bleed for large display text */
+  .ink-bleed-heavy {
+    text-shadow:
+      0.5px 0.2px 0.6px rgba(26, 26, 26, 0.18),
+      -0.3px 0.1px 0.5px rgba(26, 26, 26, 0.12),
+      0 0.3px 0.8px rgba(26, 26, 26, 0.08),
+      0.2px -0.1px 0.3px rgba(26, 26, 26, 0.06);
+  }
+
+  /* --- Wax seal — CSS-only circular seal for topic badges --- */
+  .wax-seal {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+      #c0564e 0%,
+      #8b3a3a 40%,
+      #6b2a2a 70%,
+      #5a2222 100%
+    );
+    box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.15),
+      inset 0 -2px 6px rgba(0, 0, 0, 0.3),
+      0 2px 6px rgba(0, 0, 0, 0.25),
+      0 1px 2px rgba(0, 0, 0, 0.15);
+    color: rgba(255, 240, 230, 0.85);
+    font-family: var(--font-playfair);
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  /* Irregular edge via clip-path for organic feel */
+  .wax-seal::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%,
+      #a04040 0%,
+      #7a3030 50%,
+      transparent 70%
+    );
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+
+  /* Seal variants by topic color */
+  .wax-seal--sage {
+    background: radial-gradient(circle at 35% 35%, #7a9a70 0%, #4a6a42 40%, #3a5a32 70%, #2a4a22 100%);
+  }
+  .wax-seal--sage::before {
+    background: radial-gradient(circle at 40% 40%, #5a7a50 0%, #3a5a30 50%, transparent 70%);
+  }
+
+  .wax-seal--navy {
+    background: radial-gradient(circle at 35% 35%, #5a7a9a 0%, #2a4a6a 40%, #1a3a5a 70%, #0a2a4a 100%);
+  }
+  .wax-seal--navy::before {
+    background: radial-gradient(circle at 40% 40%, #4a6a8a 0%, #1a3a5a 50%, transparent 70%);
+  }
+
+  .wax-seal--gold {
+    background: radial-gradient(circle at 35% 35%, #c4a050 0%, #9a7a30 40%, #7a6020 70%, #5a4810 100%);
+  }
+  .wax-seal--gold::before {
+    background: radial-gradient(circle at 40% 40%, #b09040 0%, #7a6020 50%, transparent 70%);
+  }
+
+  /* Small seal variant */
+  .wax-seal--sm {
+    width: 36px;
+    height: 36px;
+    font-size: 9px;
+  }
+
+  /* --- Postage stamp — perforated border element --- */
+  .postage-stamp {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background: #f5f0e8;
+    border: 1px solid #c4b8a8;
+    /* Perforated edge via radial-gradient mask */
+    -webkit-mask-image: radial-gradient(
+      circle at 4px 0, transparent 3px, black 3.5px
+    ),
+    radial-gradient(
+      circle at 4px 100%, transparent 3px, black 3.5px
+    ),
+    radial-gradient(
+      circle at 0 4px, transparent 3px, black 3.5px
+    ),
+    radial-gradient(
+      circle at 100% 4px, transparent 3px, black 3.5px
+    );
+    -webkit-mask-size: 8px 100%, 8px 100%, 100% 8px, 100% 8px;
+    -webkit-mask-position: top, bottom, left, right;
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .postage-stamp-value {
+    font-family: var(--font-playfair);
+    font-size: 18px;
+    font-style: italic;
+    color: #3a2a1a;
+    line-height: 1;
+  }
+
+  .postage-stamp-label {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8a7a6a;
+    margin-top: 2px;
+  }
+
+  /* --- Envelope fold line --- */
+  .envelope-fold {
+    position: relative;
+    border-top: 1px solid rgba(180, 165, 140, 0.4);
+  }
+
+  .envelope-fold::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      to bottom,
+      rgba(180, 165, 140, 0.15),
+      transparent
+    );
+  }
+
+  /* --- Postal cancellation mark — struck-through circle stamp --- */
+  .cancel-mark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.35;
+  }
+
+  .cancel-mark::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .cancel-mark::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 60px;
+    height: 0;
+    border-top: 1px solid currentColor;
+    transform: rotate(-15deg);
+  }
+
+  /* --- Airmail stripe border --- */
+  .airmail-border {
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 6px,
+      #c41e3a 6px,
+      #c41e3a 8px,
+      transparent 8px,
+      transparent 14px,
+      #1e3a5f 14px,
+      #1e3a5f 16px
+    );
+    background-size: 100% 4px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    padding-bottom: 8px;
+  }
+
+  /* ============================================================
+     END VINTAGE POSTAL
+     ============================================================ */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .drop-cap::first-letter {
+    @apply font-headline text-5xl font-bold float-left mr-3 mt-1 leading-none;
+  }
+}
+
+/* ============================================================
+   CINEMATIC READER — scroll-driven typographic experience
+   ============================================================ */
+
+/* --- Scroll reveal animations --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children slightly */
+.scroll-reveal:nth-child(even) {
+  transition-delay: 0.05s;
+}
+
+/* --- Cinematic Reader container --- */
+.cinematic-reader {
+  position: relative;
+}
+
+/* --- Thesis callout — dramatic intellectual hook --- */
+.cinematic-thesis {
+  max-width: 36rem;
+  margin: 0 auto 3.5rem;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.cinematic-thesis-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #8a8a8a;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.cinematic-thesis-text {
+  font-family: var(--font-playfair);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: #1a1a1a;
+  text-wrap: balance;
+  text-shadow:
+    0.4px 0.1px 0.5px rgba(26, 26, 26, 0.15),
+    -0.2px 0.1px 0.4px rgba(26, 26, 26, 0.1);
+}
+
+.cinematic-thesis-rule {
+  width: 3rem;
+  height: 2px;
+  margin: 1.5rem auto 0;
+}
+
+/* --- Section layouts --- */
+.cinematic-section {
+  margin-bottom: 0;
+  padding: 2rem 0;
+}
+
+.cinematic-narrow {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.cinematic-wide {
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.cinematic-wide-tinted {
+  max-width: 100%;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding: 2.5rem 3rem;
+}
+
+@media (min-width: 768px) {
+  .cinematic-wide-tinted {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding: 3rem 5rem;
+  }
+}
+
+.cinematic-narrow-ruled {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1.5rem;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 1.8rem,
+    var(--rule-color, rgba(180, 180, 180, 0.2)) 1.8rem,
+    var(--rule-color, rgba(180, 180, 180, 0.2)) calc(1.8rem + 1px)
+  );
+}
+
+.cinematic-narrow-offset {
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: 8%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .cinematic-narrow-offset {
+    margin-right: auto;
+  }
+}
+
+/* --- Section headings with number --- */
+.cinematic-heading-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.cinematic-section-num {
+  font-family: var(--font-playfair);
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+  opacity: 0.35;
+  user-select: none;
+  flex-shrink: 0;
+  position: relative;
+  top: 0.15em;
+}
+
+@media (min-width: 768px) {
+  .cinematic-section-num {
+    font-size: 4rem;
+    position: absolute;
+    left: -4.5rem;
+    top: -0.2em;
+  }
+
+  .cinematic-heading-row {
+    gap: 0;
+  }
+}
+
+.cinematic-heading {
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: #1a1a1a;
+  font-style: italic;
+  text-wrap: balance;
+  text-shadow:
+    0.3px 0 0.4px rgba(26, 26, 26, 0.12),
+    -0.2px 0 0.3px rgba(26, 26, 26, 0.08);
+}
+
+/* --- Blockquote breakout — full-bleed typographic moment --- */
+.cinematic-breakout {
+  position: relative;
+  margin: 2.5rem -1.5rem;
+  padding: 2.5rem 2rem 2.5rem 2.5rem;
+  border-left: 4px solid;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .cinematic-breakout {
+    margin: 3rem -4rem;
+    padding: 3rem 3rem 3rem 3.5rem;
+  }
+}
+
+.cinematic-breakout-text {
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: #1a1a1a;
+  text-wrap: balance;
+  margin: 0;
+  text-shadow:
+    0.5px 0.2px 0.6px rgba(26, 26, 26, 0.15),
+    -0.3px 0.1px 0.4px rgba(26, 26, 26, 0.1);
+}
+
+@media (min-width: 768px) {
+  .cinematic-breakout-text {
+    font-size: 1.75rem;
+  }
+}
+
+.cinematic-breakout-mark {
+  font-family: var(--font-playfair);
+  font-size: 4rem;
+  line-height: 1;
+  position: absolute;
+  top: 0.25rem;
+  left: 0.75rem;
+  opacity: 0.3;
+}
+
+.cinematic-breakout-mark--end {
+  position: static;
+  display: inline;
+  font-size: 2rem;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+/* --- Section dividers — typographic, not generic --- */
+.cinematic-divider {
+  text-align: center;
+  padding: 1.75rem 0;
+  user-select: none;
+}
+
+.cinematic-divider-symbol {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  letter-spacing: 0.5em;
+  opacity: 0.5;
+}
+
+/* --- Prose within cinematic sections --- */
+.cinematic-prose {
+  font-family: var(--font-source-serif);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #1a1a1a;
+}
+
+.cinematic-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.cinematic-prose p:first-child::first-letter {
+  font-family: var(--font-playfair);
+  font-size: 3.2rem;
+  font-weight: 700;
+  float: left;
+  margin-right: 0.5rem;
+  margin-top: 0.15rem;
+  line-height: 1;
+  color: #1a1a1a;
+}
+
+.cinematic-prose h3 {
+  font-family: var(--font-playfair);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.cinematic-prose a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+
+.cinematic-prose a:hover {
+  color: #4a4a4a;
+}
+
+.cinematic-prose blockquote {
+  font-family: var(--font-playfair);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  border-left: 2px solid var(--pull-quote-color, #1a1a1a);
+  color: #1a1a1a;
+}
+
+.cinematic-prose strong {
+  /* Highlighter effect on bold text */
+  background: linear-gradient(
+    transparent 55%,
+    var(--pull-quote-color, #f2ebe0) 55%,
+    var(--pull-quote-color, #f2ebe0) 90%,
+    transparent 90%
+  );
+  padding: 0 3px;
+  font-weight: 600;
+}
+
+.cinematic-prose ul,
+.cinematic-prose ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.cinematic-prose li {
+  margin-bottom: 0.4rem;
+}
+
+.cinematic-prose li::marker {
+  color: #8a8a8a;
+}
+
+/* Only drop-cap the very first section's first paragraph */
+.cinematic-section:not(:first-of-type) .cinematic-prose p:first-child::first-letter {
+  font-size: inherit;
+  font-weight: inherit;
+  float: none;
+  margin: 0;
+  line-height: inherit;
+}
+
+/* --- Sources — designed, not dumped --- */
+.cinematic-sources {
+  max-width: 42rem;
+  margin: 3rem auto 0;
+  padding: 2rem 1.5rem;
+}
+
+.cinematic-sources-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cinematic-sources-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #8a8a8a;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.cinematic-sources-rule {
+  flex: 1;
+  height: 1px;
+  opacity: 0.4;
+}
+
+.cinematic-sources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .cinematic-sources-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cinematic-source-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8a8a8a;
+}
+
+.cinematic-source-type {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cinematic-source-title {
+  color: #4a4a4a;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 2px;
+}
+
+.cinematic-source-title:hover {
+  color: #1a1a1a;
+}
+
+.cinematic-source-author {
+  color: #8a8a8a;
+}
+
+/* ============================================================
+   END CINEMATIC READER
+   ============================================================ */
+
+/* Prose images — magazine style */
+.prose img {
+  @apply w-full my-6;
+  max-height: 20rem;
+  object-fit: cover;
+}
+
+/* Pressroom — typewriter cursor blink */
+.pressroom-cursor {
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Pressroom — shimmer on progress bar leading edge */
+.pressroom-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.3), transparent);
+  animation: shimmer-slide 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer-slide {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
