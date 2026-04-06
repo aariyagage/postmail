@@ -741,6 +741,110 @@
    END CINEMATIC READER
    ============================================================ */
 
+/* ============================================================
+   LANDING PAGE — decorative animations
+   ============================================================ */
+
+/* Floating keyword watermarks — gentle vertical drift */
+.landing-float {
+  animation: landing-float-drift ease-in-out infinite alternate;
+}
+
+@keyframes landing-float-drift {
+  0% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
+  100% { transform: translateY(-12px) rotate(var(--tw-rotate, 0deg)); }
+}
+
+/* Constellation node pulse */
+.landing-node-pulse {
+  animation: landing-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes landing-pulse {
+  0% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.15); }
+  100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Constellation line draw-in */
+.landing-line-draw {
+  stroke-dashoffset: 100;
+  animation: landing-draw 2s ease forwards;
+}
+
+@keyframes landing-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Binary rain — slow downward scroll */
+.landing-binary-rain {
+  animation: landing-rain linear infinite;
+}
+
+@keyframes landing-rain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Stamp entrance — drop + slight bounce */
+.landing-stamp-enter {
+  animation: landing-stamp-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+}
+
+@keyframes landing-stamp-drop {
+  0% { opacity: 0; transform: rotate(3deg) translateY(-20px) scale(0.8); }
+  100% { opacity: 1; transform: rotate(3deg) translateY(0) scale(1); }
+}
+
+/* Step cards stagger entrance */
+.landing-step-enter {
+  animation: landing-step-fade 0.6s ease both;
+}
+
+@keyframes landing-step-fade {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Topic pills stagger entrance */
+.landing-topic-enter {
+  animation: landing-topic-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes landing-topic-pop {
+  0% { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Envelope wireframe fade-in */
+.landing-envelope-fade {
+  animation: landing-envelope 3s ease 1s both;
+}
+
+@keyframes landing-envelope {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .landing-float,
+  .landing-node-pulse,
+  .landing-line-draw,
+  .landing-binary-rain,
+  .landing-stamp-enter,
+  .landing-step-enter,
+  .landing-topic-enter,
+  .landing-envelope-fade {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   END LANDING PAGE
+   ============================================================ */
+
 /* Prose images — magazine style */
 .prose img {
   @apply w-full my-6;
