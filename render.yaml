@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: postmail-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: POSTMAIL_DATABASE_URL
+        sync: false
+      - key: POSTMAIL_GROQ_API_KEY
+        sync: false
+      - key: POSTMAIL_SUPABASE_URL
+        sync: false
+      - key: POSTMAIL_CORS_ORIGINS
+        sync: false
+    healthCheckPath: /health

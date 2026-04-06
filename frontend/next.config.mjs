@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  // output: "standalone" only needed for Docker deploys, not Vercel
+  ...(process.env.DOCKER_BUILD === "1" ? { output: "standalone" } : {}),
   async rewrites() {
     return [
       {
