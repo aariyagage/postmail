@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "@/lib/theme";
 
 const SAMPLE_TOPICS = [
   "Philosophy",
@@ -41,8 +40,6 @@ const STEPS = [
 
 
 export default function LandingPage() {
-  const { theme, toggle: toggleTheme } = useTheme();
-
   return (
     <main className="min-h-screen bg-paper">
       {/* ============ MASTHEAD ============ */}
@@ -56,13 +53,6 @@ export default function LandingPage() {
                 </h1>
               </div>
               <nav className="flex gap-5 items-baseline">
-                <button
-                  onClick={toggleTheme}
-                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors"
-                  aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-                >
-                  {theme === "light" ? "dark" : "light"}
-                </button>
                 <Link
                   href="/login"
                   className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors"
