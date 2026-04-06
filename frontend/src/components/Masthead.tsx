@@ -35,14 +35,14 @@ export default function Masthead() {
   }
 
   return (
-    <header className="mb-2">
-      <div className="max-w-6xl mx-auto px-6 pt-6 pb-4">
+    <header className="mb-4">
+      <div className="max-w-6xl mx-auto px-6 pt-8 pb-5">
         {/* Airmail stripe at top */}
-        <div className="airmail-border mb-5">
+        <div className="airmail-border mb-6">
           <div className="flex items-baseline justify-between">
-            <div className="flex items-baseline gap-4">
+            <div className="flex items-baseline gap-5">
               <Link href="/">
-                <h1 className="font-headline text-4xl tracking-tight italic ink-bleed-heavy">
+                <h1 className="font-headline text-5xl tracking-tight italic ink-bleed-heavy">
                   Postmail
                 </h1>
               </Link>
@@ -53,7 +53,7 @@ export default function Masthead() {
                 </div>
               )}
             </div>
-            <nav className="flex gap-4 items-baseline flex-wrap">
+            <nav className="flex gap-5 items-baseline flex-wrap">
               <Link href="/" className={navClass("/")}>
                 home
               </Link>
