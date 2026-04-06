@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
+import { useTheme } from "@/lib/theme";
 
 export default function Masthead() {
   const { isAuthenticated, signOut } = useAuth();
+  const { theme, toggle: toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -35,14 +37,14 @@ export default function Masthead() {
   }
 
   return (
-    <header className="mb-2">
-      <div className="max-w-6xl mx-auto px-6 pt-6 pb-4">
+    <header className="mb-4">
+      <div className="max-w-6xl mx-auto px-6 pt-8 pb-5">
         {/* Airmail stripe at top */}
-        <div className="airmail-border mb-5">
+        <div className="airmail-border mb-6">
           <div className="flex items-baseline justify-between">
-            <div className="flex items-baseline gap-4">
+            <div className="flex items-baseline gap-5">
               <Link href="/">
-                <h1 className="font-headline text-4xl tracking-tight italic ink-bleed-heavy">
+                <h1 className="font-headline text-5xl tracking-tight italic ink-bleed-heavy">
                   Postmail
                 </h1>
               </Link>
@@ -53,7 +55,7 @@ export default function Masthead() {
                 </div>
               )}
             </div>
-            <nav className="flex gap-4 items-baseline flex-wrap">
+            <nav className="flex gap-5 items-baseline flex-wrap">
               <Link href="/" className={navClass("/")}>
                 home
               </Link>
@@ -69,6 +71,15 @@ export default function Masthead() {
               <Link href="/profile" className={navClass("/profile")}>
                 profile
               </Link>
+              {mounted && (
+                <button
+                  onClick={toggleTheme}
+                  className="font-mono text-[11px] lowercase transition-colors text-ink-muted hover:text-ink"
+                  aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+                >
+                  {theme === "light" ? "dark" : "light"}
+                </button>
+              )}
               {mounted && isAuthenticated && (
                 <button
                   onClick={() => signOut()}

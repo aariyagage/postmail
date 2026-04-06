@@ -2,11 +2,14 @@
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { BookmarkProvider } from "@/contexts/BookmarkContext";
+import { ThemeProvider } from "@/lib/theme";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>
-      <BookmarkProvider>{children}</BookmarkProvider>
+      <ThemeProvider>
+        <BookmarkProvider>{children}</BookmarkProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
