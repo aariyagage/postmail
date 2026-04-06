@@ -52,15 +52,15 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/auth") ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api");
-  // Unauthenticated user trying to access protected route
+  // Unauthenticated user trying to access protected route → landing page
   if (!user && isProtected && !isAssetOrContent) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = "/landing";
     return NextResponse.redirect(url);
   }
 
-  // Authenticated user on login page -> redirect to home
-  if (user && pathname === "/login") {
+  // Authenticated user on login or landing page → go to home
+  if (user && (pathname === "/login" || pathname === "/landing")) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     return NextResponse.redirect(url);
