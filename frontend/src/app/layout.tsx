@@ -59,19 +59,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${imFell.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
-      suppressHydrationWarning
     >
-      <head>
-        {/* Prevent flash of wrong theme */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            var t = localStorage.getItem('postmail-theme');
-            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-              document.documentElement.classList.add('dark');
-            }
-          })();
-        `}} />
-      </head>
       <body className="bg-paper text-ink font-body antialiased">
         <Providers>{children}</Providers>
       </body>

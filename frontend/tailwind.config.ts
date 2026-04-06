@@ -6,7 +6,6 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
     borderRadius: {
       none: "0",
@@ -28,33 +27,33 @@ const config: Config = {
       },
       colors: {
         ink: {
-          DEFAULT: "var(--color-ink)",
-          light: "var(--color-ink-light)",
-          muted: "var(--color-ink-muted)",
+          DEFAULT: "#1a1a1a",
+          light: "#4a4a4a",
+          muted: "#8a8a8a",
         },
         paper: {
-          DEFAULT: "var(--color-paper)",
-          warm: "var(--color-paper-warm)",
-          cool: "var(--color-paper-cool)",
+          DEFAULT: "#faf9f6",
+          warm: "#f5f0e8",
+          cool: "#f0f2f5",
         },
         accent: {
-          red: "var(--color-accent-red)",
-          blue: "var(--color-accent-blue)",
-          gold: "var(--color-accent-gold)",
+          red: "#c41e3a",
+          blue: "#1e3a5f",
+          gold: "#c4a43e",
         },
         tint: {
-          rose: "var(--color-tint-rose)",
-          sage: "var(--color-tint-sage)",
-          cream: "var(--color-tint-cream)",
-          lavender: "var(--color-tint-lavender)",
-          sky: "var(--color-tint-sky)",
-          sand: "var(--color-tint-sand)",
-          blush: "var(--color-tint-blush)",
-          mint: "var(--color-tint-mint)",
+          rose: "#f0ddd8",
+          sage: "#dde8df",
+          cream: "#f2ebe0",
+          lavender: "#e4e0ed",
+          sky: "#dce6ed",
+          sand: "#ede8da",
+          blush: "#f2e0e4",
+          mint: "#d8ede6",
         },
         rule: {
-          DEFAULT: "var(--color-rule)",
-          light: "var(--color-rule-light)",
+          DEFAULT: "#1a1a1a",
+          light: "#d4d4d4",
         },
       },
       boxShadow: {
@@ -69,8 +68,8 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            "--tw-prose-body": "var(--color-ink)",
-            "--tw-prose-headings": "var(--color-ink)",
+            "--tw-prose-body": "#1a1a1a",
+            "--tw-prose-headings": "#1a1a1a",
             maxWidth: "65ch",
           },
         },
