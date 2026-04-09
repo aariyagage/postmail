@@ -30,7 +30,7 @@ export default function Masthead() {
 
   function navClass(href: string) {
     const active = pathname === href;
-    return `font-mono text-[11px] lowercase transition-colors ${
+    return `font-mono text-[11px] lowercase transition-colors hover-underline ${
       active ? "text-ink" : "text-ink-muted hover:text-ink"
     }`;
   }
@@ -48,7 +48,7 @@ export default function Masthead() {
                 </h1>
               </Link>
               {mounted && (
-                <div className="postage-stamp transition-transform duration-300 hover:rotate-6 cursor-default">
+                <div className="postage-stamp stamp-wobble cursor-default">
                   <span className="postage-stamp-value">{String(dayOfYear).padStart(3, "0")}</span>
                   <span className="postage-stamp-label">edition</span>
                 </div>

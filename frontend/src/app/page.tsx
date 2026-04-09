@@ -208,7 +208,7 @@ export default function Home() {
 
         {/* Topics — colored pills */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap stagger-reveal">
             <span className="section-label mr-1">your topics</span>
             {user?.interests.map((interest) => {
               const tint = getTopicTint(interest.topic);
@@ -345,10 +345,10 @@ export default function Home() {
             {/* Featured essay — front page treatment */}
             {featuredEssay && (
               <section
-                className="mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
+                className="scroll-reveal mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
                 style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg }}
               >
-                <div className="rule-double mb-6" />
+                <div className="rule-grow visible mb-6" />
                 {digest.big_question && (
                   <p className="font-mono text-[11px] text-ink-muted mb-4">
                     -- today&apos;s question

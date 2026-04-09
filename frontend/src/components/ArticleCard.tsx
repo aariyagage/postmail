@@ -22,7 +22,7 @@ export default function ArticleCard({
   variant = "lg",
 }: ArticleCardProps) {
   return (
-    <article className="py-4 group transition-transform duration-200 hover:-translate-y-0.5">
+    <article className="py-4 group transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-paper-warm/40">
       <div className="flex items-center gap-2 mb-1.5">
         {category && <TopicTag topic={category} />}
         <span className="font-mono text-[11px] text-ink-muted">

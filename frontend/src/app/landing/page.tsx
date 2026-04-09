@@ -56,13 +56,13 @@ export default function LandingPage() {
               <nav className="flex gap-5 items-baseline">
                 <Link
                   href="/login"
-                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors"
+                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors hover-underline"
                 >
                   sign in
                 </Link>
                 <Link
                   href="/onboarding"
-                  className="font-mono text-[11px] lowercase border border-ink px-4 py-1.5 hover:bg-ink hover:text-paper transition-colors"
+                  className="font-mono text-[11px] lowercase border border-ink px-4 py-1.5 hover:bg-ink hover:text-paper transition-all duration-300 hover:scale-105"
                 >
                   get started
                 </Link>
@@ -90,12 +90,12 @@ export default function LandingPage() {
             <div className="flex items-center gap-6 shrink-0">
               <Link
                 href="/onboarding"
-                className="font-mono text-[12px] lowercase bg-ink text-paper px-8 py-4 hover:bg-ink-light transition-colors"
+                className="font-mono text-[12px] lowercase bg-ink text-paper px-8 py-4 btn-ink-spread transition-colors"
               >
                 start reading — it&apos;s free
               </Link>
               <div
-                className="postage-stamp hidden md:block"
+                className="postage-stamp stamp-wobble hidden md:block"
                 style={{ transform: "rotate(3deg)" }}
               >
                 <span className="postage-stamp-value">No. 1</span>
