@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Masthead from "@/components/Masthead";
 import PageShell from "@/components/PageShell";
-import { getTopicTint } from "@/lib/topicColors";
+import TopicTag from "@/components/TopicTag";
 import { useAuth } from "@/lib/auth";
 import { api } from "@/lib/api";
 import type { ReadingStats, User } from "@/types";
@@ -34,9 +34,9 @@ export default function ProfilePage() {
       <main className="min-h-screen bg-paper">
         <Masthead />
         <div className="max-w-2xl mx-auto px-6 py-12 animate-pulse">
-          <div className="h-3 w-16 bg-paper-warm mb-8" />
-          <div className="h-6 w-32 bg-paper-warm mb-4" />
-          <div className="h-3 w-48 bg-paper-warm" />
+          <div className="h-3 w-16 bg-ink/10 mb-8" />
+          <div className="h-6 w-32 bg-ink/10 mb-4" />
+          <div className="h-3 w-48 bg-ink/10" />
         </div>
       </main>
     );
@@ -44,11 +44,11 @@ export default function ProfilePage() {
 
   return (
     <PageShell>
-        <p className="section-label mb-8">profile</p>
+        <p className="section-label mb-2">profile</p>
 
         {/* Identity */}
         <div className="mb-10">
-          <h2 className="font-headline text-2xl mb-1">{user?.name}</h2>
+          <h2 className="font-headline text-3xl italic ink-bleed-heavy mb-1">{user?.name}</h2>
           <p className="font-mono text-[11px] text-ink-muted">{user?.email}</p>
         </div>
 
@@ -57,15 +57,9 @@ export default function ProfilePage() {
           <p className="section-label mb-3">your topics</p>
           <div className="space-y-2 mb-3">
             {user?.interests.map((interest) => {
-              const tint = getTopicTint(interest.topic);
               return (
                 <div key={interest.id} className="flex items-center gap-2">
-                  <span
-                    className="font-mono text-[11px] lowercase px-2 py-0.5"
-                    style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
-                  >
-                    {interest.topic}
-                  </span>
+                  <TopicTag topic={interest.topic} />
                   {interest.description && (
                     <span className="font-mono text-[10px] text-ink-muted">
                       ({interest.description})
@@ -89,7 +83,7 @@ export default function ProfilePage() {
             <p className="section-label mb-4">reading</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               <div>
-                <span className="font-headline text-3xl block leading-none">
+                <span className={`font-headline text-3xl block leading-none ink-bleed ${stats.current_streak > 0 ? "text-accent-gold" : ""}`}>
                   {stats.current_streak}
                 </span>
                 <span className="font-mono text-[11px] text-ink-muted">

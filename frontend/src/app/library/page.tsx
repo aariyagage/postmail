@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Masthead from "@/components/Masthead";
 import PageShell from "@/components/PageShell";
-import { getTopicTint } from "@/lib/topicColors";
+import TopicTag from "@/components/TopicTag";
 import { api } from "@/lib/api";
 import type { Digest, DigestSummary } from "@/types";
 
@@ -50,12 +50,12 @@ export default function LibraryPage() {
       <main className="min-h-screen bg-paper">
         <Masthead />
         <div className="max-w-2xl mx-auto px-6 py-12 animate-pulse">
-          <div className="h-3 w-16 bg-paper-warm mb-8" />
+          <div className="h-3 w-16 bg-ink/10 mb-8" />
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (
               <div key={i}>
-                <div className="h-2 w-24 bg-paper-warm mb-2" />
-                <div className="h-5 w-2/3 bg-paper-warm" />
+                <div className="h-2 w-24 bg-ink/10 mb-2" />
+                <div className="h-5 w-2/3 bg-ink/10" />
               </div>
             ))}
           </div>
@@ -66,7 +66,8 @@ export default function LibraryPage() {
 
   return (
     <PageShell>
-        <p className="section-label mb-8">library</p>
+        <p className="section-label mb-2">library</p>
+        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">Past Editions</h1>
 
         {error ? (
           <div className="py-12">
@@ -97,7 +98,7 @@ export default function LibraryPage() {
                     className="w-full text-left group"
                   >
                     <div className="flex items-baseline justify-between mb-1">
-                      <span className="font-mono text-[11px] text-ink-muted">
+                      <span className="font-mono text-[11px] text-accent-gold">
                         no. {String(idx + 1).padStart(3, "0")}
                       </span>
                       <span className="font-mono text-[11px] text-ink-muted">
@@ -108,16 +109,16 @@ export default function LibraryPage() {
                       {dateStr}
                     </p>
                     {d.headline && (
-                      <h3 className="font-headline text-lg leading-snug group-hover:text-ink-light transition-colors">
+                      <h3 className="font-headline text-lg leading-snug group-hover:text-ink-light transition-colors italic ink-bleed">
                         {d.headline}
                       </h3>
                     )}
                   </button>
 
                   <div
-                    className="grid transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                    className="transition-all duration-300 ease-in-out overflow-hidden"
                     style={{
-                      gridTemplateRows: isOpen ? "1fr" : "0fr",
+                      maxHeight: isOpen ? "2000px" : "0",
                       opacity: isOpen ? 1 : 0,
                     }}
                   >
@@ -125,7 +126,6 @@ export default function LibraryPage() {
                       {expandedDigest && (
                         <div className="mt-4 pl-4 border-l-2 border-rule-light">
                           {expandedDigest.essays.map((essay) => {
-                            const tint = getTopicTint(essay.topic);
                             return (
                               <Link
                                 key={essay.id}
@@ -133,15 +133,7 @@ export default function LibraryPage() {
                                 className="block py-3 group/essay"
                               >
                                 <div className="flex items-center gap-2 mb-1">
-                                  <span
-                                    className="font-mono text-[11px] lowercase px-1.5 py-0.5"
-                                    style={{
-                                      backgroundColor: tint.bg,
-                                      color: "#4a4a4a",
-                                    }}
-                                  >
-                                    {essay.topic}
-                                  </span>
+                                  <TopicTag topic={essay.topic} />
                                   <span className="font-mono text-[11px] text-ink-muted">
                                     {essay.reading_time_minutes} min
                                   </span>

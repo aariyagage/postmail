@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Masthead from "@/components/Masthead";
+import InlineError from "@/components/InlineError";
 import { useAuth } from "@/lib/auth";
 import { api } from "@/lib/api";
 
@@ -82,7 +83,7 @@ export default function LoginPage() {
       <Masthead />
       <div className="max-w-3xl mx-auto px-6 py-12">
         <div className="text-center mb-10">
-          <h1 className="font-headline text-5xl mb-4">
+          <h1 className="font-headline text-5xl mb-4 italic ink-bleed-heavy">
             welcome back
           </h1>
           <p className="font-body text-lg text-ink-light max-w-xl mx-auto">
@@ -91,9 +92,7 @@ export default function LoginPage() {
         </div>
         <div className="rule-thick mb-8" />
 
-        {error && (
-          <p className="text-accent-red font-mono text-sm mb-4 text-center">-- {error}</p>
-        )}
+        {error && <InlineError message={error} />}
 
         <div className="max-w-md mx-auto">
           {/* Google Sign-In */}
@@ -127,7 +126,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:outline-none focus:border-ink"
+                className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:border-ink"
                 placeholder="your@email.com"
               />
             </div>
@@ -140,14 +139,14 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:outline-none focus:border-ink"
+                className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:border-ink"
                 placeholder="your password"
               />
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-ink text-paper py-3 font-mono text-sm font-bold lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
+              className="w-full bg-ink text-paper px-6 py-3 font-mono text-[12px] lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
             >
               {submitting ? "signing in..." : "sign in"}
             </button>

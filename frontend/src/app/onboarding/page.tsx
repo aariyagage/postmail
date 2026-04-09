@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Masthead from "@/components/Masthead";
+import InlineError from "@/components/InlineError";
 import { useAuth } from "@/lib/auth";
 import { api } from "@/lib/api";
 
@@ -175,9 +176,12 @@ export default function OnboardingPage() {
       <div className="max-w-3xl mx-auto px-6 py-12">
 
         {step === "auth" && !authUser && (
-          <>
+          <div className="relative">
+            <span className="absolute top-0 left-1/2 -translate-x-1/2 font-headline text-[12rem] italic opacity-[0.03] pointer-events-none select-none leading-none">
+              P
+            </span>
             <div className="text-center mb-10">
-              <h1 className="font-headline text-5xl mb-4">
+              <h1 className="font-headline text-5xl mb-4 italic ink-bleed-heavy">
                 your morning read,<br />tailored to you
               </h1>
               <p className="font-body text-lg text-ink-light max-w-xl mx-auto">
@@ -188,9 +192,7 @@ export default function OnboardingPage() {
             </div>
             <div className="rule-thick mb-8" />
 
-            {error && (
-              <p className="text-accent-red font-mono text-sm mb-4 text-center">-- {error}</p>
-            )}
+            {error && <InlineError message={error} />}
 
             {confirmationSent ? (
               <div className="max-w-md mx-auto text-center py-8">
@@ -239,7 +241,7 @@ export default function OnboardingPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:outline-none focus:border-ink"
+                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:border-ink"
                       placeholder="your name"
                     />
                   </div>
@@ -252,7 +254,7 @@ export default function OnboardingPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:outline-none focus:border-ink"
+                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:border-ink"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -266,14 +268,14 @@ export default function OnboardingPage() {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       minLength={6}
-                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:outline-none focus:border-ink"
+                      className="w-full border border-rule px-4 py-3 font-body text-lg bg-paper focus:border-ink"
                       placeholder="at least 6 characters"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={authSubmitting}
-                    className="w-full bg-ink text-paper py-3 font-mono text-sm font-bold lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
+                    className="w-full bg-ink text-paper px-6 py-3 font-mono text-[12px] lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
                   >
                     {authSubmitting ? "creating account..." : "create account"}
                   </button>
@@ -290,13 +292,13 @@ export default function OnboardingPage() {
                 </p>
               </div>
             )}
-          </>
+          </div>
         )}
 
         {step === "interests" && (
           <>
-            <div className="text-center mb-8">
-              <h1 className="font-headline text-4xl mb-3">
+            <div className="text-center mb-10">
+              <h1 className="font-headline text-4xl mb-3 italic ink-bleed-heavy">
                 what fascinates you?
               </h1>
               <p className="font-body text-lg text-ink-light">
@@ -304,49 +306,86 @@ export default function OnboardingPage() {
               </p>
             </div>
 
-            {error && (
-              <p className="text-accent-red font-mono text-sm mb-4 text-center">-- {error}</p>
-            )}
+            {error && <InlineError message={error} />}
 
             {authUser && (
-              <div className="mb-6 p-3 bg-paper-warm border border-rule-light text-center">
+              <div className="mb-8 p-3 bg-paper-warm border border-rule-light text-center">
                 <p className="font-mono text-sm text-ink-muted">
                   signed in as <span className="text-ink font-bold">{authUser.email}</span>
                 </p>
               </div>
             )}
 
-            {/* Topic cards grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+            {/* Topic list — editorial table of contents */}
+            <div className="max-w-2xl mx-auto mb-8">
               {CURATED_TOPICS.map(({ topic, description }) => {
                 const isSelected = selectedTopics.includes(topic);
                 const isDisabled = !isSelected && selectedTopics.length >= MAX_TOPICS;
                 return (
-                  <button
-                    key={topic}
-                    onClick={() => toggleTopic(topic)}
-                    disabled={isDisabled}
-                    className={`text-left p-4 border transition-all ${
-                      isSelected
-                        ? "border-ink bg-ink text-paper"
-                        : isDisabled
-                          ? "border-rule-light text-ink-muted opacity-50 cursor-not-allowed"
-                          : "border-rule-light hover:border-ink hover:bg-paper-warm"
-                    }`}
-                  >
-                    <p className={`font-mono text-sm lowercase ${isSelected ? "text-paper" : "text-ink"}`}>
-                      {topic}
-                    </p>
-                    <p className={`font-body text-xs mt-1 ${isSelected ? "text-paper/70" : "text-ink-muted"}`}>
-                      {description}
-                    </p>
-                  </button>
+                  <div key={topic}>
+                    <button
+                      onClick={() => toggleTopic(topic)}
+                      disabled={isDisabled}
+                      className={`w-full text-left py-4 flex items-baseline justify-between gap-4 transition-all ${
+                        isSelected
+                          ? "bg-paper-warm border-l-[3px] border-accent-red pl-4 -ml-4 pr-4"
+                          : isDisabled
+                            ? "opacity-40 cursor-not-allowed"
+                            : "hover:bg-paper-warm/50"
+                      }`}
+                    >
+                      <div>
+                        <p className="font-headline text-lg italic ink-bleed">
+                          {topic}
+                        </p>
+                        <p className="font-body text-xs text-ink-muted mt-0.5">
+                          {description}
+                        </p>
+                      </div>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-muted shrink-0">
+                        {isSelected ? (
+                          <span className="text-accent-red">&#10003;</span>
+                        ) : (
+                          "add"
+                        )}
+                      </span>
+                    </button>
+                    {/* Inline depth selector */}
+                    {isSelected && (
+                      <div className="pl-4 -ml-4 pb-3 border-l-[3px] border-accent-red bg-paper-warm pr-4">
+                        <div className="flex items-center gap-1">
+                          <span className="font-mono text-[10px] text-ink-muted mr-2">depth:</span>
+                          {[
+                            { key: "beginner", label: "new to this" },
+                            { key: "intermediate", label: "know the basics" },
+                            { key: "advanced", label: "go deep" },
+                          ].map(({ key, label }) => (
+                            <button
+                              key={key}
+                              onClick={() => setTopicDepths((prev) => ({
+                                ...prev,
+                                [topic]: prev[topic] === key ? "" : key,
+                              }))}
+                              className={`font-mono text-[10px] lowercase px-2 py-0.5 border transition-all ${
+                                topicDepths[topic] === key
+                                  ? "border-ink bg-ink text-paper"
+                                  : "border-rule-light text-ink-muted hover:border-ink"
+                              }`}
+                            >
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <div className="border-b border-dashed border-rule-light" />
+                  </div>
                 );
               })}
             </div>
 
             {/* Custom topic input */}
-            <div className="mb-8">
+            <div className="max-w-2xl mx-auto mb-8">
               <p className="section-label mb-2">
                 don&apos;t see your thing?
               </p>
@@ -357,7 +396,7 @@ export default function OnboardingPage() {
                   onChange={(e) => setCustomTopic(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addCustomTopic())}
                   placeholder="add your own topic..."
-                  className="flex-1 border border-rule-light px-4 py-2 font-body text-base bg-paper focus:outline-none focus:border-ink"
+                  className="flex-1 border border-rule-light px-4 py-2 font-body text-base bg-paper focus:border-ink"
                 />
                 <button
                   onClick={addCustomTopic}
@@ -369,49 +408,8 @@ export default function OnboardingPage() {
               </div>
             </div>
 
-            {/* Depth selector — after topics are chosen */}
-            {selectedTopics.length >= MIN_TOPICS && (
-              <div className="mb-8">
-                <p className="section-label mb-2">how deep should we go?</p>
-                <p className="font-body text-xs text-ink-muted mb-4">
-                  optional — helps us calibrate complexity per topic
-                </p>
-                <div className="space-y-2">
-                  {selectedTopics.map((topic) => (
-                    <div key={topic} className="flex items-center gap-3">
-                      <span className="font-mono text-[11px] lowercase text-ink w-40 shrink-0 truncate">
-                        {topic}
-                      </span>
-                      <div className="flex gap-1">
-                        {[
-                          { key: "beginner", label: "new to this" },
-                          { key: "intermediate", label: "know the basics" },
-                          { key: "advanced", label: "go deep" },
-                        ].map(({ key, label }) => (
-                          <button
-                            key={key}
-                            onClick={() => setTopicDepths((prev) => ({
-                              ...prev,
-                              [topic]: prev[topic] === key ? "" : key,
-                            }))}
-                            className={`font-mono text-[10px] lowercase px-2 py-0.5 border transition-all ${
-                              topicDepths[topic] === key
-                                ? "border-ink bg-ink text-paper"
-                                : "border-rule-light text-ink-muted hover:border-ink"
-                            }`}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Selected topics summary + submit */}
-            <div className="border-t border-rule pt-6">
+            <div className="max-w-2xl mx-auto border-t border-rule pt-6">
               {selectedTopics.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedTopics.map((topic) => (
@@ -433,13 +431,21 @@ export default function OnboardingPage() {
               )}
 
               <div className="flex items-center justify-between">
-                <p className="font-mono text-xs lowercase text-ink-muted">
-                  {selectedTopics.length} of {MIN_TOPICS}-{MAX_TOPICS} selected
-                </p>
+                <div className="flex items-center gap-3">
+                  <p className="font-mono text-xs lowercase text-ink-muted">
+                    {selectedTopics.length} of {MIN_TOPICS}-{MAX_TOPICS} selected
+                  </p>
+                  {selectedTopics.length > 0 && (
+                    <div className="postage-stamp">
+                      <span className="postage-stamp-value">{selectedTopics.length}</span>
+                      <span className="postage-stamp-label">topics</span>
+                    </div>
+                  )}
+                </div>
                 <button
                   onClick={handleSubmit}
                   disabled={submitting || selectedTopics.length < MIN_TOPICS}
-                  className="bg-ink text-paper px-8 py-3 font-mono text-sm font-bold lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
+                  className="bg-ink text-paper px-6 py-3 font-mono text-[12px] lowercase hover:bg-ink-light transition-colors disabled:opacity-40"
                 >
                   {submitting ? "setting up..." : "build my digest"}
                 </button>

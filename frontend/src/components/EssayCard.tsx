@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
+import TopicTag from "./TopicTag";
 import { getTopicTint } from "@/lib/topicColors";
 
 interface EssayCardProps {
@@ -45,12 +46,7 @@ export default function EssayCard({
       }
     >
       <div className="flex items-center gap-2 mb-2">
-        <span
-          className="font-mono text-[11px] lowercase"
-          style={{ color: tint.border }}
-        >
-          {topic}
-        </span>
+        <TopicTag topic={topic} />
         <span className="text-ink-muted text-[11px]">&#183;</span>
         <span className="font-mono text-[11px] text-ink-muted">
           {readingTime} min

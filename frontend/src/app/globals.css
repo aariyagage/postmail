@@ -22,6 +22,12 @@
     background: #3a2a1a;
     color: #f5f0e8;
   }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
@@ -80,7 +86,7 @@
 
   /* Dot grid background — journal/graph paper feel */
   .dot-grid {
-    background-image: radial-gradient(circle, #d4d4d4 0.5px, transparent 0.5px);
+    background-image: radial-gradient(circle, #c8c4bc 0.75px, transparent 0.75px);
     background-size: 20px 20px;
   }
 

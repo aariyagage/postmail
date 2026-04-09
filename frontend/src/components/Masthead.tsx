@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 
 export default function Masthead() {
-  const { isAuthenticated, signOut } = useAuth();
+  const { isAuthenticated, signOut, user } = useAuth();
   const [mounted, setMounted] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Masthead() {
           <div className="flex items-baseline justify-between">
             <div className="flex items-baseline gap-5">
               <Link href="/">
-                <h1 className="font-headline text-5xl tracking-tight italic ink-bleed-heavy">
+                <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
                   Postmail
                 </h1>
               </Link>
@@ -66,16 +67,36 @@ export default function Masthead() {
               <Link href="/saved" className={navClass("/saved")}>
                 saved
               </Link>
-              <Link href="/profile" className={navClass("/profile")}>
-                profile
-              </Link>
               {mounted && isAuthenticated && (
-                <button
-                  onClick={() => signOut()}
-                  className="font-mono text-[11px] lowercase transition-colors text-ink-muted hover:text-ink"
-                >
-                  sign out
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    className="w-7 h-7 flex items-center justify-center border border-rule-light text-[11px] font-mono lowercase text-ink-muted hover:text-ink hover:border-ink transition-colors"
+                    aria-label="Profile menu"
+                  >
+                    {user?.email?.[0]?.toUpperCase() || "?"}
+                  </button>
+                  {profileOpen && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setProfileOpen(false)} />
+                      <div className="absolute right-0 top-full mt-2 z-50 bg-paper border border-rule-light py-1 min-w-[120px]">
+                        <Link
+                          href="/profile"
+                          onClick={() => setProfileOpen(false)}
+                          className="block px-4 py-2 font-mono text-[11px] lowercase text-ink-muted hover:text-ink hover:bg-paper-warm transition-colors"
+                        >
+                          profile
+                        </Link>
+                        <button
+                          onClick={() => { signOut(); setProfileOpen(false); }}
+                          className="block w-full text-left px-4 py-2 font-mono text-[11px] lowercase text-ink-muted hover:text-ink hover:bg-paper-warm transition-colors"
+                        >
+                          sign out
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
               )}
             </nav>
           </div>

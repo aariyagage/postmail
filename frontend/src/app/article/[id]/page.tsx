@@ -7,6 +7,7 @@ import CinematicReader from "@/components/CinematicReader";
 import BookmarkButton from "@/components/BookmarkButton";
 import ReadingProgress from "@/components/ReadingProgress";
 import ShareButton from "@/components/ShareButton";
+import TopicTag from "@/components/TopicTag";
 import { getTopicTint } from "@/lib/topicColors";
 import { api } from "@/lib/api";
 import type { Article } from "@/types";
@@ -37,12 +38,12 @@ export default function ArticlePage() {
       <main className="min-h-screen bg-paper">
         <Masthead />
         <div className="max-w-2xl mx-auto px-6 py-12 animate-pulse">
-          <div className="h-2 w-16 bg-paper-warm mb-4" />
-          <div className="h-8 w-3/4 bg-paper-warm mb-3" />
-          <div className="h-3 w-32 bg-paper-warm mb-8" />
+          <div className="h-2 w-16 bg-ink/10 mb-4" />
+          <div className="h-8 w-3/4 bg-ink/10 mb-3" />
+          <div className="h-3 w-32 bg-ink/10 mb-8" />
           <div className="space-y-3">
-            <div className="h-3 w-full bg-paper-warm" />
-            <div className="h-3 w-5/6 bg-paper-warm" />
+            <div className="h-3 w-full bg-ink/10" />
+            <div className="h-3 w-5/6 bg-ink/10" />
           </div>
         </div>
       </main>
@@ -73,14 +74,7 @@ export default function ArticlePage() {
       {/* Article header — centered, dramatic */}
       <header className="max-w-3xl mx-auto px-6 pt-12 pb-4 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
-          {article.category && (
-            <span
-              className="font-mono text-[10px] uppercase tracking-[0.2em] px-2 py-1"
-              style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
-            >
-              {article.category}
-            </span>
-          )}
+          {article.category && <TopicTag topic={article.category} />}
           <span className="font-mono text-[10px] text-ink-muted tracking-wider">
             via {article.source_name}
           </span>
@@ -94,7 +88,7 @@ export default function ArticlePage() {
           )}
         </div>
 
-        <h1 className="font-headline text-3xl md:text-4xl leading-[1.15] text-balance mb-5">
+        <h1 className="font-headline text-3xl md:text-4xl leading-[1.15] text-balance mb-5 italic ink-bleed-heavy">
           {article.title}
         </h1>
 
@@ -104,11 +98,7 @@ export default function ArticlePage() {
         </div>
 
         {/* Decorative rule */}
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <div className="w-16 h-px" style={{ backgroundColor: tint.border }} />
-          <span className="font-mono text-[9px] text-ink-muted">{"·"}</span>
-          <div className="w-16 h-px" style={{ backgroundColor: tint.border }} />
-        </div>
+        <div className="envelope-fold mb-2" />
       </header>
 
       {/* Cinematic body */}

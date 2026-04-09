@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
-import { getTopicTint } from "@/lib/topicColors";
+import TopicTag from "@/components/TopicTag";
 import { api } from "@/lib/api";
 import type { SearchResult } from "@/types";
 
@@ -32,7 +32,8 @@ export default function SearchPage() {
 
   return (
     <PageShell>
-        <p className="section-label mb-6">search</p>
+        <p className="section-label mb-2">search</p>
+        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-6">Search</h1>
 
         <div className="flex items-center gap-3 mb-8">
           <input
@@ -41,7 +42,7 @@ export default function SearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder="essays about free will, consciousness, game theory..."
-            className="flex-1 border-b border-dashed border-rule-light px-0 py-2 font-mono text-sm bg-transparent focus:outline-none focus:border-ink placeholder:text-ink-muted"
+            className="flex-1 border-b-2 border-rule-light px-0 py-2 font-mono text-base bg-transparent focus:border-ink placeholder:text-ink-muted"
             autoFocus
           />
           <button
@@ -57,8 +58,8 @@ export default function SearchPage() {
           <div className="animate-pulse space-y-4">
             {[1, 2, 3].map((i) => (
               <div key={i}>
-                <div className="h-2 w-16 bg-paper-warm mb-2" />
-                <div className="h-5 w-3/4 bg-paper-warm" />
+                <div className="h-2 w-16 bg-ink/10 mb-2" />
+                <div className="h-5 w-3/4 bg-ink/10" />
               </div>
             ))}
           </div>
@@ -82,7 +83,6 @@ export default function SearchPage() {
               {results.length} results
             </p>
             {results.map((r) => {
-              const tint = getTopicTint(r.topic || r.title);
               const href =
                 r.type === "essay"
                   ? `/essay/${r.id}`
@@ -98,17 +98,7 @@ export default function SearchPage() {
                     <span className="font-mono text-[11px] text-ink-muted">
                       {r.type}
                     </span>
-                    {r.topic && (
-                      <span
-                        className="font-mono text-[11px] lowercase px-1.5 py-0.5"
-                        style={{
-                          backgroundColor: tint.bg,
-                          color: "#4a4a4a",
-                        }}
-                      >
-                        {r.topic}
-                      </span>
-                    )}
+                    {r.topic && <TopicTag topic={r.topic} />}
                     {r.reading_time_minutes && (
                       <span className="font-mono text-[11px] text-ink-muted">
                         {r.reading_time_minutes} min
@@ -120,7 +110,7 @@ export default function SearchPage() {
                       </span>
                     )}
                   </div>
-                  <h3 className="font-headline text-base leading-snug group-hover:text-ink-light transition-colors">
+                  <h3 className="font-headline text-base leading-snug group-hover:text-ink-light transition-colors italic ink-bleed">
                     {r.title}
                   </h3>
                   {r.subtitle && (

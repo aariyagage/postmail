@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
-import { getTopicTint } from "@/lib/topicColors";
+import TopicTag from "./TopicTag";
 
 interface ArticleCardProps {
   id?: string;
@@ -21,19 +21,10 @@ export default function ArticleCard({
   href,
   variant = "lg",
 }: ArticleCardProps) {
-  const tint = getTopicTint(category || title);
-
   return (
     <article className="py-4 group">
       <div className="flex items-center gap-2 mb-1.5">
-        {category && (
-          <span
-            className="font-mono text-[11px] lowercase px-1.5 py-0.5"
-            style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
-          >
-            {category}
-          </span>
-        )}
+        {category && <TopicTag topic={category} />}
         <span className="font-mono text-[11px] text-ink-muted">
           via {source}
         </span>

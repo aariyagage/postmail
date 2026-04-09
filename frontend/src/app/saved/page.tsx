@@ -5,6 +5,7 @@ import Masthead from "@/components/Masthead";
 import PageShell from "@/components/PageShell";
 import ArticleCard from "@/components/ArticleCard";
 import EssayCard from "@/components/EssayCard";
+import InlineError from "@/components/InlineError";
 import { useBookmarks } from "@/contexts/BookmarkContext";
 import { api } from "@/lib/api";
 import type { Article, Essay } from "@/types";
@@ -74,13 +75,13 @@ export default function SavedPage() {
       <main className="min-h-screen bg-paper">
         <Masthead />
         <div className="max-w-2xl mx-auto px-6 py-12 animate-pulse">
-          <div className="h-3 w-16 bg-paper-warm mb-8" />
+          <div className="h-3 w-16 bg-ink/10 mb-8" />
           <div className="space-y-8">
             {[1, 2, 3].map((i) => (
               <div key={i}>
-                <div className="h-2 w-20 bg-paper-warm mb-3" />
-                <div className="h-5 w-2/3 bg-paper-warm mb-2" />
-                <div className="h-3 w-1/2 bg-paper-warm" />
+                <div className="h-2 w-20 bg-ink/10 mb-3" />
+                <div className="h-5 w-2/3 bg-ink/10 mb-2" />
+                <div className="h-3 w-1/2 bg-ink/10" />
               </div>
             ))}
           </div>
@@ -91,27 +92,18 @@ export default function SavedPage() {
 
   return (
     <PageShell>
-        <p className="section-label mb-8">saved</p>
+        <p className="section-label mb-2">saved</p>
+        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">Saved</h1>
 
-        {error && (
-          <div className="mb-6 py-3 px-4 border border-dashed border-ink-muted">
-            <p className="font-mono text-xs text-ink-muted">{error}</p>
-            <button
-              onClick={() => setError(null)}
-              className="font-mono text-[11px] text-ink-muted hover:text-ink mt-1 underline"
-            >
-              dismiss
-            </button>
-          </div>
-        )}
+        {error && <InlineError message={error} onDismiss={() => setError(null)} />}
 
         {hydrated.length === 0 ? (
           <div className="py-12">
-            <p className="font-mono text-xs text-ink-muted mb-2">
-              -- nothing saved yet
+            <p className="font-headline text-xl italic ink-bleed mb-2">
+              Your reading list is empty
             </p>
             <p className="font-body text-sm text-ink-muted">
-              Bookmark essays and articles to find them here.
+              Bookmark essays and articles as you read. They&apos;ll wait for you here.
             </p>
           </div>
         ) : (

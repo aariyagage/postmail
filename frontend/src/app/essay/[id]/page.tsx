@@ -8,6 +8,7 @@ import EssayCard from "@/components/EssayCard";
 import BookmarkButton from "@/components/BookmarkButton";
 import ReadingProgress from "@/components/ReadingProgress";
 import ShareButton from "@/components/ShareButton";
+import TopicTag from "@/components/TopicTag";
 import { getTopicTint } from "@/lib/topicColors";
 import { api } from "@/lib/api";
 import type { Essay } from "@/types";
@@ -69,12 +70,12 @@ export default function EssayPage() {
       <main className="min-h-screen bg-paper">
         <Masthead />
         <div className="max-w-2xl mx-auto px-6 py-12 animate-pulse">
-          <div className="h-2 w-20 bg-paper-warm mb-6" />
-          <div className="h-8 w-3/4 bg-paper-warm mb-3" />
-          <div className="h-4 w-1/2 bg-paper-warm mb-8" />
+          <div className="h-2 w-20 bg-ink/10 mb-6" />
+          <div className="h-8 w-3/4 bg-ink/10 mb-3" />
+          <div className="h-4 w-1/2 bg-ink/10 mb-8" />
           <div className="space-y-3">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-3 bg-paper-warm" style={{ width: `${85 - i * 5}%` }} />
+              <div key={i} className="h-3 bg-ink/10" style={{ width: `${85 - i * 5}%` }} />
             ))}
           </div>
         </div>
@@ -105,12 +106,7 @@ export default function EssayPage() {
       {/* Essay header — vintage postal */}
       <header className="max-w-3xl mx-auto px-6 pt-12 pb-4 text-center">
         <div className="flex items-center justify-center gap-4 mb-6">
-          <span
-            className="font-mono text-[10px] uppercase tracking-[0.2em] px-2 py-1"
-            style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
-          >
-            {essay.topic}
-          </span>
+          <TopicTag topic={essay.topic} />
           <div className="postage-stamp">
             <span className="postage-stamp-value">{essay.reading_time_minutes}</span>
             <span className="postage-stamp-label">min read</span>
@@ -152,7 +148,7 @@ export default function EssayPage() {
       </div>
 
       {/* Feedback */}
-      <div className="max-w-2xl mx-auto px-6 py-8">
+      <div className="max-w-2xl mx-auto bg-paper-warm py-8 px-8">
         <div className="text-center">
           <span className="font-mono text-[10px] text-ink-muted block mb-3">
             {feedback ? "noted — this shapes your next digest" : "what did you think?"}

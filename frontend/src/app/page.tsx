@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Masthead from "@/components/Masthead";
 import EssayCard from "@/components/EssayCard";
 import ArticleCard from "@/components/ArticleCard";
+import InlineError from "@/components/InlineError";
 import { getTopicTint } from "@/lib/topicColors";
 import { api } from "@/lib/api";
 import type { Digest, User } from "@/types";
@@ -117,18 +118,18 @@ export default function Home() {
         <Masthead />
         <div className="max-w-6xl mx-auto px-6 animate-pulse">
           <div className="max-w-2xl pt-12 pb-8">
-            <div className="h-3 w-24 bg-paper-warm mb-6" />
-            <div className="h-8 w-3/4 bg-paper-warm mb-3" />
-            <div className="h-5 w-1/2 bg-paper-warm mb-4" />
-            <div className="h-3 w-20 bg-paper-warm" />
+            <div className="h-3 w-24 bg-ink/10 mb-6" />
+            <div className="h-8 w-3/4 bg-ink/10 mb-3" />
+            <div className="h-5 w-1/2 bg-ink/10 mb-4" />
+            <div className="h-3 w-20 bg-ink/10" />
           </div>
           <div className="border-b border-dashed border-rule-light mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="mb-8">
-                <div className="h-2 w-20 bg-paper-warm mb-3" />
-                <div className="h-6 w-4/5 bg-paper-warm mb-2" />
-                <div className="h-4 w-2/3 bg-paper-warm" />
+                <div className="h-2 w-20 bg-ink/10 mb-3" />
+                <div className="h-6 w-4/5 bg-ink/10 mb-2" />
+                <div className="h-4 w-2/3 bg-ink/10" />
               </div>
             ))}
           </div>
@@ -162,18 +163,18 @@ export default function Home() {
     <main className="min-h-screen bg-paper">
       <Masthead />
       <div className="max-w-6xl mx-auto px-6">
+        {/* Edition header */}
+        <div className="rule-double mb-4" />
+        <div className="flex items-baseline justify-between mb-2">
+          <p className="font-headline text-xl italic ink-bleed">Today&apos;s Edition</p>
+          <p className="font-mono text-[11px] text-ink-muted">
+            {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+          </p>
+        </div>
+        <div className="rule-hairline mb-8" />
+
         {/* Error */}
-        {error && (
-          <div className="mb-6 py-3 px-4 border border-dashed border-ink-muted">
-            <p className="font-mono text-xs text-ink-muted">{error}</p>
-            <button
-              onClick={() => setError(null)}
-              className="font-mono text-[11px] text-ink-muted hover:text-ink mt-1 underline"
-            >
-              dismiss
-            </button>
-          </div>
-        )}
+        {error && <InlineError message={error} onDismiss={() => setError(null)} />}
 
         {/* Topics — colored pills */}
         <div className="flex items-center justify-between mb-8">
@@ -249,7 +250,7 @@ export default function Home() {
                 onChange={(e) => setNewTopic(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleAddTopic()}
                 placeholder="or type your own..."
-                className="flex-1 border-b border-dashed border-rule-light px-0 py-1 font-mono text-xs bg-transparent focus:outline-none focus:border-ink placeholder:text-ink-muted"
+                className="flex-1 border-b border-dashed border-rule-light px-0 py-1 font-mono text-xs bg-transparent focus:border-ink placeholder:text-ink-muted"
               />
               <button
                 onClick={handleAddTopic}
@@ -319,45 +320,47 @@ export default function Home() {
               )}
             </div>
 
-            {/* Featured essay — with wax seal and ink bleed */}
+            {/* Featured essay — front page treatment */}
             {featuredEssay && (
               <section
-                className="mb-10 max-w-2xl px-6 py-8 -mx-2"
+                className="mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
                 style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg }}
               >
+                <div className="rule-double mb-6" />
                 {digest.big_question && (
                   <p className="font-mono text-[11px] text-ink-muted mb-4">
                     -- today&apos;s question
                   </p>
                 )}
                 <Link href={`/essay/${featuredEssay.id}`} className="group block">
-                  <h2 className="font-headline text-3xl md:text-4xl leading-snug mb-3 group-hover:text-ink-light transition-colors italic ink-bleed-heavy">
+                  <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-4 group-hover:text-ink-light transition-colors italic ink-bleed-heavy max-w-4xl">
                     {digest.big_question || featuredEssay.title}
                   </h2>
                 </Link>
-                <p className="font-body text-sm text-ink-muted italic mb-3 max-w-lg">
+                <p className="font-body text-base text-ink-muted italic mb-4 max-w-lg">
                   {featuredEssay.subtitle || featuredEssay.thesis}
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="postage-stamp">
-                    <span className="postage-stamp-value">{featuredEssay.reading_time_minutes}</span>
-                    <span className="postage-stamp-label">minutes</span>
-                  </div>
-                  <span className="font-mono text-[11px] lowercase text-ink-muted">
+                  <span className="font-mono text-[11px] lowercase px-1.5 py-0.5 border-l-2 border-accent-red pl-2 text-ink-muted">
                     {featuredEssay.topic}
                   </span>
+                  <span className="text-rule-light text-[11px]">&#183;</span>
+                  <span className="font-mono text-[11px] text-ink-muted">
+                    {featuredEssay.reading_time_minutes} min read
+                  </span>
                 </div>
+                <div className="envelope-fold mt-8" />
               </section>
             )}
 
             {/* Pull quote — extracted from featured essay */}
             {pullQuote && (
-              <section className="mb-10 max-w-lg md:ml-[20%]">
-                <blockquote className="font-headline text-xl italic leading-snug text-ink border-l-2 pl-5 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
+              <section className="mb-12 max-w-lg md:ml-[20%]">
+                <blockquote className="font-headline text-2xl md:text-3xl italic leading-snug text-ink border-l-4 pl-6 ink-bleed-heavy" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
                   &ldquo;{pullQuote.trim()}&rdquo;
                 </blockquote>
                 {featuredEssay && (
-                  <p className="font-mono text-[11px] text-ink-muted mt-2 pl-5">
+                  <p className="font-mono text-[11px] text-ink-muted mt-3 pl-6">
                     — from &ldquo;{featuredEssay.title}&rdquo;
                   </p>
                 )}
@@ -412,8 +415,8 @@ export default function Home() {
 
             {/* From the Wire — on dot grid, offset */}
             {digest.articles.length > 0 && (
-              <section className="mb-12 md:ml-auto md:max-w-3xl dot-grid py-6 px-6 -mx-2">
-                <p className="section-label mb-4">from the wire</p>
+              <section className="mb-12 md:ml-auto md:max-w-3xl dot-grid py-6 px-6 -mx-2 border-t-2 border-accent-blue">
+                <p className="section-label mb-4 text-accent-blue">from the wire</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8">
                   {digest.articles.slice(0, 6).map((article) => (
                     <ArticleCard
@@ -498,6 +501,9 @@ export default function Home() {
             </footer>
           </>
         )}
+
+        {/* Page footer */}
+        <div className="airmail-border mt-8 mb-4" />
       </div>
     </main>
   );
