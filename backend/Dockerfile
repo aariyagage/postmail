@@ -12,8 +12,6 @@ RUN pip install --no-cache-dir .
 
 COPY . .
 
-# Pre-download the embedding model at build time so startup is fast
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
 EXPOSE 8000
 

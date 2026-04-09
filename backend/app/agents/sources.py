@@ -478,20 +478,21 @@ async def score_sources(
         # Can't score — return all sources unfiltered
         return sources
 
-    import numpy as np
+    import math
 
-    ref_vec = np.array(embeddings[0])
-    ref_norm = np.linalg.norm(ref_vec)
+    ref_vec = embeddings[0]
+    ref_norm = math.sqrt(sum(x * x for x in ref_vec))
     if ref_norm == 0:
         return sources
 
     scored: list[Source] = []
     for i, source in enumerate(sources):
-        src_vec = np.array(embeddings[i + 1])
-        src_norm = np.linalg.norm(src_vec)
+        src_vec = embeddings[i + 1]
+        src_norm = math.sqrt(sum(x * x for x in src_vec))
         if src_norm == 0:
             continue
-        similarity = float(np.dot(ref_vec, src_vec) / (ref_norm * src_norm))
+        dot = sum(a * b for a, b in zip(ref_vec, src_vec))
+        similarity = dot / (ref_norm * src_norm)
         source.relevance_score = similarity
         scored.append(source)
 
