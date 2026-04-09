@@ -29,10 +29,10 @@ export default function EssayCard({
 
   const wrapperClass =
     variant === "tinted"
-      ? "py-5 px-5 group -mx-5"
+      ? "py-5 px-5 group -mx-5 transition-transform duration-200 hover:-translate-y-0.5"
       : variant === "bordered"
-        ? "py-5 pl-4 group border-l-2"
-        : "py-5 group";
+        ? "py-5 pl-4 group border-l-2 transition-transform duration-200 hover:-translate-y-0.5"
+        : "py-5 group transition-transform duration-200 hover:-translate-y-0.5";
 
   return (
     <article

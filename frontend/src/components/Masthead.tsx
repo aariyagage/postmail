@@ -43,12 +43,12 @@ export default function Masthead() {
           <div className="flex items-baseline justify-between">
             <div className="flex items-baseline gap-5">
               <Link href="/">
-                <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
+                <h1 className="font-headline text-5xl md:text-6xl tracking-tight italic ink-bleed-heavy">
                   Postmail
                 </h1>
               </Link>
               {mounted && (
-                <div className="postage-stamp">
+                <div className="postage-stamp transition-transform duration-300 hover:rotate-6 cursor-default">
                   <span className="postage-stamp-value">{String(dayOfYear).padStart(3, "0")}</span>
                   <span className="postage-stamp-label">edition</span>
                 </div>
@@ -71,7 +71,7 @@ export default function Masthead() {
                 <div className="relative">
                   <button
                     onClick={() => setProfileOpen(!profileOpen)}
-                    className="w-7 h-7 flex items-center justify-center border border-rule-light text-[11px] font-mono lowercase text-ink-muted hover:text-ink hover:border-ink transition-colors"
+                    className="w-7 h-7 flex items-center justify-center border border-rule-light text-[11px] font-mono lowercase text-ink-muted hover:text-ink hover:border-ink transition-all duration-200 hover:scale-110"
                     aria-label="Profile menu"
                   >
                     {user?.email?.[0]?.toUpperCase() || "?"}

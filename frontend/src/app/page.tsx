@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Masthead from "@/components/Masthead";
@@ -32,6 +32,36 @@ export default function Home() {
   const [savingTopics, setSavingTopics] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showIntentPicker, setShowIntentPicker] = useState(false);
+  const scrollRevealRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-reveal observer for essay cards and sidebar elements
+  const setupScrollReveal = useCallback(() => {
+    const container = scrollRevealRef.current;
+    if (!container) return;
+    const elements = container.querySelectorAll(".scroll-reveal");
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("scroll-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!loading && digest) {
+      const timer = setTimeout(setupScrollReveal, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, digest, setupScrollReveal]);
 
   useEffect(() => {
     setError(null);
@@ -295,7 +325,7 @@ export default function Home() {
         )}
 
         {digest && (
-          <>
+          <div ref={scrollRevealRef}>
             {/* Edition strip */}
             <div className="flex items-center gap-3 mb-10 flex-wrap">
               <span className="font-mono text-[11px] text-ink-muted">
@@ -310,14 +340,6 @@ export default function Home() {
                 {new Date(digest.edition_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
               </span>
               <div className="flex-1" />
-              {randomEssay && (
-                <a
-                  href={`/essay/${randomEssay.id}`}
-                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors underline decoration-dashed underline-offset-2"
-                >
-                  surprise me ~
-                </a>
-              )}
             </div>
 
             {/* Featured essay — front page treatment */}
@@ -333,7 +355,7 @@ export default function Home() {
                   </p>
                 )}
                 <Link href={`/essay/${featuredEssay.id}`} className="group block">
-                  <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-4 group-hover:text-ink-light transition-colors italic ink-bleed-heavy max-w-4xl">
+                  <h2 className="font-headline text-3xl md:text-4xl leading-[1.1] mb-4 group-hover:text-ink-light transition-colors italic ink-bleed-heavy max-w-4xl">
                     {digest.big_question || featuredEssay.title}
                   </h2>
                 </Link>
@@ -353,34 +375,19 @@ export default function Home() {
               </section>
             )}
 
-            {/* Pull quote — extracted from featured essay */}
-            {pullQuote && (
-              <section className="mb-12 max-w-lg md:ml-[20%]">
-                <blockquote className="font-headline text-2xl md:text-3xl italic leading-snug text-ink border-l-4 pl-6 ink-bleed-heavy" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
-                  &ldquo;{pullQuote.trim()}&rdquo;
-                </blockquote>
-                {featuredEssay && (
-                  <p className="font-mono text-[11px] text-ink-muted mt-3 pl-6">
-                    — from &ldquo;{featuredEssay.title}&rdquo;
-                  </p>
-                )}
-              </section>
-            )}
-
             {/* Decorative divider */}
             <div className="divider-asterisk" />
 
-            {/* Essays — staggered, mixed variants */}
-            {otherEssays.length > 0 && (
-              <section className="mb-12">
-                <p className="section-label mb-6">essays</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
-                  <div>
-                    {otherEssays
-                      .filter((_, i) => i % 2 === 0)
-                      .map((essay, i) => (
+            {/* Two-column layout: essays + sidebar */}
+            <div className="flex flex-col md:flex-row gap-12 md:gap-16">
+              {/* Main column — essays */}
+              <div className="flex-1 min-w-0">
+                {otherEssays.length > 0 && (
+                  <section className="mb-12">
+                    <p className="section-label mb-6">essays</p>
+                    {otherEssays.map((essay, i) => (
+                      <div key={essay.id} className="scroll-reveal">
                         <EssayCard
-                          key={essay.id}
                           id={essay.id}
                           title={essay.title}
                           subtitle={essay.subtitle}
@@ -390,49 +397,63 @@ export default function Home() {
                           href={`/essay/${essay.id}`}
                           variant={CARD_VARIANTS[i % CARD_VARIANTS.length]}
                         />
-                      ))}
-                  </div>
-                  <div className="md:mt-16">
-                    {otherEssays
-                      .filter((_, i) => i % 2 === 1)
-                      .map((essay, i) => (
-                        <EssayCard
-                          key={essay.id}
-                          id={essay.id}
-                          title={essay.title}
-                          subtitle={essay.subtitle}
-                          topic={essay.topic}
-                          readingTime={essay.reading_time_minutes}
-                          lengthTier={essay.length_tier}
-                          href={`/essay/${essay.id}`}
-                          variant={CARD_VARIANTS[(i + 1) % CARD_VARIANTS.length]}
+                      </div>
+                    ))}
+                  </section>
+                )}
+              </div>
+
+              {/* Sidebar */}
+              <aside className="md:w-[280px] lg:w-[320px] shrink-0">
+                <div className="md:sticky md:top-24 space-y-10">
+                  {/* Pull quote */}
+                  {pullQuote && (
+                    <div className="scroll-reveal">
+                      <blockquote className="font-headline text-lg italic leading-snug text-ink border-l-3 pl-4 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
+                        &ldquo;{pullQuote.trim()}&rdquo;
+                      </blockquote>
+                      {featuredEssay && (
+                        <p className="font-mono text-[10px] text-ink-muted mt-2 pl-4">
+                          — from &ldquo;{featuredEssay.title}&rdquo;
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* From the Wire */}
+                  {digest.articles.length > 0 && (
+                    <div className="scroll-reveal dot-grid py-4 px-4 -mx-2 border-t-2 border-accent-blue">
+                      <p className="section-label mb-3 text-accent-blue">from the wire</p>
+                      {digest.articles.slice(0, 4).map((article) => (
+                        <ArticleCard
+                          key={article.id}
+                          id={article.id}
+                          title={article.title}
+                          summary={article.summary}
+                          source={article.source_name}
+                          category={article.category}
+                          href={`/article/${article.id}`}
+                          variant="sm"
                         />
                       ))}
-                  </div>
-                </div>
-              </section>
-            )}
+                    </div>
+                  )}
 
-            {/* From the Wire — on dot grid, offset */}
-            {digest.articles.length > 0 && (
-              <section className="mb-12 md:ml-auto md:max-w-3xl dot-grid py-6 px-6 -mx-2 border-t-2 border-accent-blue">
-                <p className="section-label mb-4 text-accent-blue">from the wire</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8">
-                  {digest.articles.slice(0, 6).map((article) => (
-                    <ArticleCard
-                      key={article.id}
-                      id={article.id}
-                      title={article.title}
-                      summary={article.summary}
-                      source={article.source_name}
-                      category={article.category}
-                      href={`/article/${article.id}`}
-                      variant="sm"
-                    />
-                  ))}
+                  {/* Surprise me */}
+                  {randomEssay && (
+                    <div className="scroll-reveal border border-dashed border-rule-light p-4 text-center">
+                      <p className="font-mono text-[10px] text-ink-muted mb-2">feeling curious?</p>
+                      <a
+                        href={`/essay/${randomEssay.id}`}
+                        className="font-mono text-[11px] lowercase text-ink hover:text-ink-light underline decoration-dashed underline-offset-2 transition-colors"
+                      >
+                        surprise me ~
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </section>
-            )}
+              </aside>
+            </div>
 
             {/* Closing — zine back page */}
             <footer className="mb-16 pt-8 border-t border-dashed border-rule-light">
@@ -499,7 +520,7 @@ export default function Home() {
                 )}
               </div>
             </footer>
-          </>
+          </div>
         )}
 
         {/* Page footer */}
