@@ -45,24 +45,37 @@ const TOPIC_ROTATIONS = [-2, 1, -1, 2, 0, -1.5, 1.5, -0.5, 2, -2, 1, -1];
 
 const HERO_TEXT = "original essays written for you every morning.";
 
-// Intro animation clippings
+// Intro animation clippings — packed tight, large text, fill the screen
 const CLIPPINGS = [
-  { title: "the archaeology of attention", topic: "cognitive science", time: "8 min", top: "8%", left: "5%", rotate: -3, bg: "#f0ddd8", size: "lg" },
-  { title: "why we forgot how to be bored", topic: "philosophy", time: "6 min", top: "4%", left: "45%", rotate: 2, bg: "#dde8df", size: "md" },
-  { title: "on the ethics of memory", topic: "neuroscience", time: "5 min", top: "18%", left: "55%", rotate: -1.5, bg: "#e4e0ed", size: "lg" },
-  { title: "what darwin missed", topic: "biology", time: "7 min", top: "30%", left: "8%", rotate: 4, bg: "#dce6ed", size: "sm" },
-  { title: "the paradox of choice in ancient rome", topic: "history", time: "10 min", top: "15%", left: "25%", rotate: -2, bg: "#f2ebe0", size: "md" },
-  { title: "consciousness is a hallucination", topic: "psychology", time: "4 min", top: "42%", left: "40%", rotate: 1, bg: "#f2e0e4", size: "lg" },
-  { title: "quantum mechanics for poets", topic: "physics", time: "9 min", top: "35%", left: "65%", rotate: -4, bg: "#d8ede6", size: "sm" },
-  { title: "the geometry of thought", topic: "mathematics", time: "6 min", top: "55%", left: "12%", rotate: 3, bg: "#ede8da", size: "md" },
-  { title: "language shapes reality", topic: "linguistics", time: "5 min", top: "50%", left: "50%", rotate: -2.5, bg: "#f0ddd8", size: "lg" },
-  { title: "markets as moral systems", topic: "economics", time: "7 min", top: "25%", left: "72%", rotate: 2.5, bg: "#dde8df", size: "sm" },
-  { title: "the invention of loneliness", topic: "sociology", time: "8 min", top: "65%", left: "30%", rotate: -1, bg: "#e4e0ed", size: "md" },
-  { title: "beauty and the algorithm", topic: "art & design", time: "6 min", top: "60%", left: "68%", rotate: 3.5, bg: "#dce6ed", size: "sm" },
-  { title: "free will is a feeling", topic: "philosophy", time: "5 min", top: "72%", left: "5%", rotate: -3.5, bg: "#f2ebe0", size: "lg" },
-  { title: "how stories rewire the brain", topic: "literature", time: "7 min", top: "75%", left: "55%", rotate: 1.5, bg: "#f2e0e4", size: "md" },
-  { title: "the sleep of reason", topic: "cognitive science", time: "9 min", top: "82%", left: "25%", rotate: -2, bg: "#d8ede6", size: "sm" },
-  { title: "power corrupts symmetrically", topic: "political theory", time: "6 min", top: "78%", left: "70%", rotate: 4, bg: "#ede8da", size: "lg" },
+  // Top row
+  { title: "the archaeology of attention", topic: "cognitive science", time: "8 min", top: "0%", left: "0%", rotate: -2, bg: "#f0ddd8", size: "lg" },
+  { title: "why we forgot how to be bored", topic: "philosophy", time: "6 min", top: "2%", left: "35%", rotate: 3, bg: "#dde8df", size: "lg" },
+  { title: "on the ethics of memory", topic: "neuroscience", time: "5 min", top: "1%", left: "65%", rotate: -1.5, bg: "#e4e0ed", size: "lg" },
+  // Second row
+  { title: "what darwin missed about cooperation", topic: "biology", time: "7 min", top: "14%", left: "10%", rotate: 2, bg: "#dce6ed", size: "lg" },
+  { title: "the paradox of choice", topic: "history", time: "10 min", top: "16%", left: "50%", rotate: -3, bg: "#f2ebe0", size: "md" },
+  { title: "consciousness is a hallucination", topic: "psychology", time: "4 min", top: "13%", left: "75%", rotate: 1.5, bg: "#f2e0e4", size: "lg" },
+  // Third row
+  { title: "quantum mechanics for poets", topic: "physics", time: "9 min", top: "28%", left: "0%", rotate: -1, bg: "#d8ede6", size: "md" },
+  { title: "the geometry of thought", topic: "mathematics", time: "6 min", top: "30%", left: "28%", rotate: 4, bg: "#ede8da", size: "lg" },
+  { title: "language shapes reality", topic: "linguistics", time: "5 min", top: "27%", left: "58%", rotate: -2.5, bg: "#f0ddd8", size: "lg" },
+  // Fourth row
+  { title: "markets as moral systems", topic: "economics", time: "7 min", top: "42%", left: "5%", rotate: 3, bg: "#dde8df", size: "lg" },
+  { title: "the invention of loneliness", topic: "sociology", time: "8 min", top: "44%", left: "40%", rotate: -2, bg: "#e4e0ed", size: "md" },
+  { title: "beauty and the algorithm", topic: "art & design", time: "6 min", top: "40%", left: "68%", rotate: 2, bg: "#dce6ed", size: "lg" },
+  // Fifth row
+  { title: "free will is a feeling", topic: "philosophy", time: "5 min", top: "56%", left: "0%", rotate: -3, bg: "#f2ebe0", size: "lg" },
+  { title: "how stories rewire the brain", topic: "literature", time: "7 min", top: "55%", left: "32%", rotate: 1.5, bg: "#f2e0e4", size: "lg" },
+  { title: "the sleep of reason", topic: "cognitive science", time: "9 min", top: "58%", left: "62%", rotate: -1, bg: "#d8ede6", size: "md" },
+  // Sixth row
+  { title: "power corrupts symmetrically", topic: "political theory", time: "6 min", top: "68%", left: "8%", rotate: 2.5, bg: "#ede8da", size: "md" },
+  { title: "the body keeps the score", topic: "neuroscience", time: "8 min", top: "70%", left: "38%", rotate: -4, bg: "#f0ddd8", size: "lg" },
+  { title: "utopia as method", topic: "political theory", time: "5 min", top: "67%", left: "70%", rotate: 1, bg: "#dde8df", size: "lg" },
+  // Bottom row
+  { title: "entropy and empathy", topic: "physics", time: "6 min", top: "80%", left: "0%", rotate: -2, bg: "#e4e0ed", size: "lg" },
+  { title: "the last library", topic: "history", time: "7 min", top: "82%", left: "30%", rotate: 3, bg: "#dce6ed", size: "lg" },
+  { title: "what machines dream about", topic: "AI", time: "4 min", top: "79%", left: "55%", rotate: -1.5, bg: "#f2ebe0", size: "md" },
+  { title: "silence as resistance", topic: "philosophy", time: "5 min", top: "83%", left: "78%", rotate: 2, bg: "#f2e0e4", size: "lg" },
 ];
 
 function IntroAnimation({ onComplete }: { onComplete: () => void }) {
@@ -77,12 +90,12 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
       setVisibleCount(count);
       if (count >= CLIPPINGS.length) {
         clearInterval(interval);
-        // Hold for a moment, then fade
-        setTimeout(() => setFading(true), 600);
+        // Hold briefly, then fade
+        setTimeout(() => setFading(true), 400);
         // Complete after fade finishes
-        setTimeout(() => onComplete(), 1600);
+        setTimeout(() => onComplete(), 1200);
       }
-    }, 150);
+    }, 90);
     return () => clearInterval(interval);
   }, [onComplete]);
 
@@ -91,23 +104,23 @@ function IntroAnimation({ onComplete }: { onComplete: () => void }) {
       className="fixed inset-0 z-[100] bg-paper overflow-hidden"
       style={{
         opacity: fading ? 0 : 1,
-        transition: "opacity 1s cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: "opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
       {CLIPPINGS.map((clip, i) => {
         const isVisible = i < visibleCount;
         const sizeClasses =
           clip.size === "lg"
-            ? "px-6 py-5 max-w-[320px]"
+            ? "px-7 py-6 max-w-[420px]"
             : clip.size === "md"
-              ? "px-5 py-4 max-w-[260px]"
-              : "px-4 py-3 max-w-[220px]";
+              ? "px-6 py-5 max-w-[350px]"
+              : "px-5 py-4 max-w-[300px]";
         const titleClasses =
           clip.size === "lg"
-            ? "font-headline text-xl italic ink-bleed leading-snug"
+            ? "font-headline text-2xl md:text-3xl italic ink-bleed leading-snug"
             : clip.size === "md"
-              ? "font-headline text-base italic ink-bleed leading-snug"
-              : "font-headline text-sm italic ink-bleed leading-snug";
+              ? "font-headline text-xl md:text-2xl italic ink-bleed leading-snug"
+              : "font-headline text-lg md:text-xl italic ink-bleed leading-snug";
 
         return (
           <div
