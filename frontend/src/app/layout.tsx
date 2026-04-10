@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, IM_Fell_DW_Pica, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Inter, Libre_Baskerville, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const imFell = IM_Fell_DW_Pica({
-  weight: "400",
+const libreBaskerville = Libre_Baskerville({
+  weight: ["400", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${imFell.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
+      className={`${libreBaskerville.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
     >
       <body className="bg-paper text-ink font-body antialiased">
         <Providers>{children}</Providers>
