@@ -50,7 +50,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 pt-8 pb-4">
           <div className="airmail-border mb-4">
             <div className="flex items-baseline justify-between">
-              <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
+              <h1 className="font-logo text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
                 postmail
               </h1>
               <nav className="flex gap-5 items-baseline">
@@ -270,7 +270,7 @@ export default function LandingPage() {
       {/* ============ FOOTER ============ */}
       <footer className="airmail-border">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <p className="font-headline text-lg italic ink-bleed">postmail</p>
+          <p className="font-logo text-lg italic ink-bleed">postmail</p>
           <nav className="flex gap-5">
             <Link
               href="/login"

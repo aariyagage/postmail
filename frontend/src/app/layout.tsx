@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Gupter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Inter, Gupter, IM_Fell_DW_Pica, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -7,6 +7,14 @@ const gupter = Gupter({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const imFell = IM_Fell_DW_Pica({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-logo",
   display: "swap",
 });
 
@@ -57,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${gupter.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
+      className={`${gupter.variable} ${imFell.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
     >
       <body className="bg-paper text-ink font-body antialiased">
         <Providers>{children}</Providers>

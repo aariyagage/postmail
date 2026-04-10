@@ -21,6 +21,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         headline: ["var(--font-playfair)", "serif"],
+        logo: ["var(--font-logo)", "serif"],
         body: ["var(--font-source-serif)", "serif"],
         ui: ["var(--font-inter)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],

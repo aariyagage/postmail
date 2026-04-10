@@ -43,7 +43,7 @@ export default function Masthead() {
           <div className="flex items-baseline justify-between">
             <div className="flex items-baseline gap-5">
               <Link href="/">
-                <h1 className="font-headline text-5xl md:text-6xl tracking-tight italic ink-bleed-heavy">
+                <h1 className="font-logo text-5xl md:text-6xl tracking-tight italic ink-bleed-heavy">
                   postmail
                 </h1>
               </Link>
