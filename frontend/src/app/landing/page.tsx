@@ -45,23 +45,146 @@ const TOPIC_ROTATIONS = [-2, 1, -1, 2, 0, -1.5, 1.5, -0.5, 2, -2, 1, -1];
 
 const HERO_TEXT = "original essays written for you every morning.";
 
+// Intro animation clippings
+const CLIPPINGS = [
+  { title: "the archaeology of attention", topic: "cognitive science", time: "8 min", top: "8%", left: "5%", rotate: -3, bg: "#f0ddd8", size: "lg" },
+  { title: "why we forgot how to be bored", topic: "philosophy", time: "6 min", top: "4%", left: "45%", rotate: 2, bg: "#dde8df", size: "md" },
+  { title: "on the ethics of memory", topic: "neuroscience", time: "5 min", top: "18%", left: "55%", rotate: -1.5, bg: "#e4e0ed", size: "lg" },
+  { title: "what darwin missed", topic: "biology", time: "7 min", top: "30%", left: "8%", rotate: 4, bg: "#dce6ed", size: "sm" },
+  { title: "the paradox of choice in ancient rome", topic: "history", time: "10 min", top: "15%", left: "25%", rotate: -2, bg: "#f2ebe0", size: "md" },
+  { title: "consciousness is a hallucination", topic: "psychology", time: "4 min", top: "42%", left: "40%", rotate: 1, bg: "#f2e0e4", size: "lg" },
+  { title: "quantum mechanics for poets", topic: "physics", time: "9 min", top: "35%", left: "65%", rotate: -4, bg: "#d8ede6", size: "sm" },
+  { title: "the geometry of thought", topic: "mathematics", time: "6 min", top: "55%", left: "12%", rotate: 3, bg: "#ede8da", size: "md" },
+  { title: "language shapes reality", topic: "linguistics", time: "5 min", top: "50%", left: "50%", rotate: -2.5, bg: "#f0ddd8", size: "lg" },
+  { title: "markets as moral systems", topic: "economics", time: "7 min", top: "25%", left: "72%", rotate: 2.5, bg: "#dde8df", size: "sm" },
+  { title: "the invention of loneliness", topic: "sociology", time: "8 min", top: "65%", left: "30%", rotate: -1, bg: "#e4e0ed", size: "md" },
+  { title: "beauty and the algorithm", topic: "art & design", time: "6 min", top: "60%", left: "68%", rotate: 3.5, bg: "#dce6ed", size: "sm" },
+  { title: "free will is a feeling", topic: "philosophy", time: "5 min", top: "72%", left: "5%", rotate: -3.5, bg: "#f2ebe0", size: "lg" },
+  { title: "how stories rewire the brain", topic: "literature", time: "7 min", top: "75%", left: "55%", rotate: 1.5, bg: "#f2e0e4", size: "md" },
+  { title: "the sleep of reason", topic: "cognitive science", time: "9 min", top: "82%", left: "25%", rotate: -2, bg: "#d8ede6", size: "sm" },
+  { title: "power corrupts symmetrically", topic: "political theory", time: "6 min", top: "78%", left: "70%", rotate: 4, bg: "#ede8da", size: "lg" },
+];
+
+function IntroAnimation({ onComplete }: { onComplete: () => void }) {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    // Pop in clippings one by one
+    let count = 0;
+    const interval = setInterval(() => {
+      count++;
+      setVisibleCount(count);
+      if (count >= CLIPPINGS.length) {
+        clearInterval(interval);
+        // Hold for a moment, then fade
+        setTimeout(() => setFading(true), 600);
+        // Complete after fade finishes
+        setTimeout(() => onComplete(), 1600);
+      }
+    }, 150);
+    return () => clearInterval(interval);
+  }, [onComplete]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-paper overflow-hidden"
+      style={{
+        opacity: fading ? 0 : 1,
+        transition: "opacity 1s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
+    >
+      {CLIPPINGS.map((clip, i) => {
+        const isVisible = i < visibleCount;
+        const sizeClasses =
+          clip.size === "lg"
+            ? "px-6 py-5 max-w-[320px]"
+            : clip.size === "md"
+              ? "px-5 py-4 max-w-[260px]"
+              : "px-4 py-3 max-w-[220px]";
+        const titleClasses =
+          clip.size === "lg"
+            ? "font-headline text-xl italic ink-bleed leading-snug"
+            : clip.size === "md"
+              ? "font-headline text-base italic ink-bleed leading-snug"
+              : "font-headline text-sm italic ink-bleed leading-snug";
+
+        return (
+          <div
+            key={i}
+            className={`absolute ${sizeClasses} border border-rule-light`}
+            style={{
+              top: clip.top,
+              left: clip.left,
+              transform: `rotate(${clip.rotate}deg) scale(${isVisible ? 1 : 0.3})`,
+              opacity: isVisible ? 1 : 0,
+              backgroundColor: clip.bg,
+              transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+              zIndex: i + 1,
+            }}
+          >
+            <p className="font-mono text-[9px] lowercase text-ink-muted mb-1.5 tracking-wide">
+              {clip.topic} &middot; {clip.time}
+            </p>
+            <p className={titleClasses}>{clip.title}</p>
+            <div className="border-b border-dashed border-rule-light mt-3 opacity-40" />
+          </div>
+        );
+      })}
+
+      {/* Postmail watermark in center */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{
+          opacity: visibleCount > 8 ? 0 : 0.04,
+          transition: "opacity 1s ease",
+        }}
+      >
+        <span className="font-logo text-[10rem] md:text-[14rem] italic select-none">
+          postmail
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
+  const [introComplete, setIntroComplete] = useState(false);
+  const [skipIntro, setSkipIntro] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
 
+  // Check if intro was already shown this session
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem("postmail-intro-seen")) {
+        setSkipIntro(true);
+        setIntroComplete(true);
+      }
+    }
+  }, []);
+
+  // Start typing after intro completes
+  useEffect(() => {
+    if (!introComplete) return;
     let i = 0;
     const interval = setInterval(() => {
       i++;
       setTypedText(HERO_TEXT.slice(0, i));
       if (i >= HERO_TEXT.length) {
         clearInterval(interval);
-        // Hide cursor after a brief pause
         setTimeout(() => setShowCursor(false), 1500);
       }
     }, 35);
     return () => clearInterval(interval);
-  }, []);
+  }, [introComplete]);
+
+  const handleIntroComplete = () => {
+    setIntroComplete(true);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("postmail-intro-seen", "1");
+    }
+  };
 
   const now = new Date();
   const today = now.toLocaleDateString("en-US", {
@@ -72,6 +195,11 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen bg-paper">
+      {/* Intro animation overlay */}
+      {!skipIntro && !introComplete && (
+        <IntroAnimation onComplete={handleIntroComplete} />
+      )}
+
       {/* ============ MASTHEAD ============ */}
       <header className="mb-4">
         <div className="max-w-6xl mx-auto px-6 pt-8 pb-5">
