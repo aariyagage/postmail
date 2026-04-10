@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Masthead() {
   const { isAuthenticated, signOut, user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const pathname = usePathname();
@@ -67,6 +69,15 @@ export default function Masthead() {
               <Link href="/saved" className={navClass("/saved")}>
                 saved
               </Link>
+              {mounted && (
+                <button
+                  onClick={toggleTheme}
+                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "light" ? "dark" : "light"}
+                </button>
+              )}
               {mounted && isAuthenticated && (
                 <div className="relative">
                   <button

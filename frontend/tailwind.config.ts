@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -28,19 +29,19 @@ const config: Config = {
       },
       colors: {
         ink: {
-          DEFAULT: "#1a1a1a",
-          light: "#4a4a4a",
-          muted: "#8a8a8a",
+          DEFAULT: "var(--color-ink)",
+          light: "var(--color-ink-light)",
+          muted: "var(--color-ink-muted)",
         },
         paper: {
-          DEFAULT: "#faf9f6",
-          warm: "#f5f0e8",
-          cool: "#f0f2f5",
+          DEFAULT: "var(--color-paper)",
+          warm: "var(--color-paper-warm)",
+          cool: "var(--color-paper-cool)",
         },
         accent: {
-          red: "#c41e3a",
-          blue: "#1e3a5f",
-          gold: "#c4a43e",
+          red: "var(--color-accent-red)",
+          blue: "var(--color-accent-blue)",
+          gold: "var(--color-accent-gold)",
         },
         tint: {
           rose: "#f0ddd8",
@@ -53,8 +54,8 @@ const config: Config = {
           mint: "#d8ede6",
         },
         rule: {
-          DEFAULT: "#1a1a1a",
-          light: "#d4d4d4",
+          DEFAULT: "var(--color-rule)",
+          light: "var(--color-rule-light)",
         },
       },
       boxShadow: {

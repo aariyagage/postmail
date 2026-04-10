@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const SAMPLE_TOPICS = [
   "Philosophy",
@@ -46,6 +47,7 @@ const TOPIC_ROTATIONS = [-2, 1, -1, 2, 0, -1.5, 1.5, -0.5, 2, -2, 1, -1];
 const HERO_TEXT = "original essays written for you every morning.";
 
 export default function LandingPage() {
+  const { theme, toggleTheme } = useTheme();
   const [typedText, setTypedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
 
@@ -82,6 +84,12 @@ export default function LandingPage() {
                 </h1>
               </div>
               <nav className="flex gap-5 items-baseline">
+                <button
+                  onClick={toggleTheme}
+                  className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors"
+                >
+                  {theme === "light" ? "dark" : "light"}
+                </button>
                 <Link
                   href="/login"
                   className="font-mono text-[11px] lowercase text-ink-muted hover:text-ink transition-colors hover-underline"
@@ -142,7 +150,7 @@ export default function LandingPage() {
       {/* ============ WHAT YOU GET ============ */}
       <section>
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <div className="rule-double mb-6" style={{ borderColor: "#c41e3a" }} />
+          <div className="rule-double mb-6 border-accent-red" />
           <p className="section-label mb-10">what arrives in your digest</p>
 
           <div className="grid md:grid-cols-3 gap-0">

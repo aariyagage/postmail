@@ -66,7 +66,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${gupter.variable} ${imFell.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('postmail-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="bg-paper text-ink font-body antialiased">
         <Providers>{children}</Providers>
       </body>

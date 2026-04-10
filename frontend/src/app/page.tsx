@@ -216,7 +216,7 @@ export default function Home() {
                 <span
                   key={interest.id}
                   className="inline-flex items-center gap-1 font-mono text-[11px] lowercase px-2 py-0.5"
-                  style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
+                  style={{ backgroundColor: tint.bg, color: "var(--color-ink-light)" }}
                 >
                   {interest.topic}
                   {showTopics && (
@@ -378,7 +378,7 @@ export default function Home() {
             {/* Pull quote — below featured essay, above columns */}
             {pullQuote && (
               <section className="mb-10 max-w-lg md:ml-[10%] scroll-reveal">
-                <blockquote className="font-headline text-xl italic leading-snug text-ink border-l-4 pl-5 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
+                <blockquote className="font-headline text-xl italic leading-snug text-ink border-l-4 pl-5 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "var(--color-ink)" }}>
                   <span className="font-logo text-3xl leading-none">&ldquo;</span>{pullQuote.trim()}<span className="font-logo text-3xl leading-none">&rdquo;</span>
                 </blockquote>
                 {featuredEssay && (
