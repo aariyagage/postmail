@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const SAMPLE_TOPICS = [
@@ -21,38 +22,66 @@ const STEPS = [
   {
     num: "01",
     title: "choose your curiosities",
-    desc: "Pick 3\u20137 topics that fascinate you. Anything from quantum mechanics to political philosophy.",
+    desc: "pick 3\u20137 topics that fascinate you. anything from quantum mechanics to political philosophy.",
   },
   {
     num: "02",
     title: "we research overnight",
-    desc: "Our AI pipeline scours books, papers, lectures, and podcasts \u2014 assembling a research dossier on each topic.",
+    desc: "our AI pipeline scours books, papers, lectures, and podcasts \u2014 assembling a research dossier on each topic.",
   },
   {
     num: "03",
     title: "original essays, written for you",
-    desc: "Every morning, a fresh edition lands: long-form essays with real sources, not summaries or listicles.",
+    desc: "every morning, a fresh edition lands: long-form essays with real sources, not summaries or listicles.",
   },
   {
     num: "04",
     title: "your library grows",
-    desc: "Every edition is saved. Bookmark what resonates. Search across everything. Watch your intellectual map expand.",
+    desc: "every edition is saved. bookmark what resonates. search across everything. watch your intellectual map expand.",
   },
 ];
 
 const TOPIC_ROTATIONS = [-2, 1, -1, 2, 0, -1.5, 1.5, -0.5, 2, -2, 1, -1];
 
+const HERO_TEXT = "original essays written for you every morning.";
+
 export default function LandingPage() {
+  const [typedText, setTypedText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setTypedText(HERO_TEXT.slice(0, i));
+      if (i >= HERO_TEXT.length) {
+        clearInterval(interval);
+        // Hide cursor after a brief pause
+        setTimeout(() => setShowCursor(false), 1500);
+      }
+    }, 35);
+    return () => clearInterval(interval);
+  }, []);
+
+  const now = new Date();
+  const today = now.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <main className="min-h-screen bg-paper">
       {/* ============ MASTHEAD ============ */}
-      <header>
-        <div className="max-w-6xl mx-auto px-6 pt-8 pb-4">
-          <div className="airmail-border mb-4">
+      <header className="mb-4">
+        <div className="max-w-6xl mx-auto px-6 pt-8 pb-5">
+          <div className="airmail-border mb-6">
             <div className="flex items-baseline justify-between">
-              <h1 className="font-logo text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
-                postmail
-              </h1>
+              <div className="flex items-baseline gap-5">
+                <h1 className="font-logo text-5xl md:text-6xl tracking-tight italic ink-bleed-heavy">
+                  postmail
+                </h1>
+              </div>
               <nav className="flex gap-5 items-baseline">
                 <Link
                   href="/login"
@@ -62,30 +91,35 @@ export default function LandingPage() {
                 </Link>
                 <Link
                   href="/onboarding"
-                  className="font-mono text-[11px] lowercase border border-ink px-4 py-1.5 hover:bg-ink hover:text-paper transition-all duration-300 hover:scale-105"
+                  className="font-mono text-[11px] lowercase border border-ink px-4 py-1.5 hover:bg-ink hover:text-paper transition-all duration-300"
                 >
                   get started
                 </Link>
               </nav>
             </div>
           </div>
-          <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-ink-muted">
-            your intellectual daily digest
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-[11px] text-ink-muted">{today}</p>
+            <div className="flex-1 mx-4 border-b border-dashed border-rule-light" />
+            <p className="font-mono text-[11px] text-ink-muted italic">your intellectual daily digest</p>
+          </div>
         </div>
       </header>
 
       {/* ============ HERO ============ */}
-      <section className="min-h-[65vh] flex items-end">
+      <section className="min-h-[60vh] flex items-end">
         <div className="max-w-6xl mx-auto px-6 pb-20 w-full">
-          <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl italic ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
-            original essays written for you every morning.
+          <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl italic ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
+            {typedText}
+            {showCursor && (
+              <span className="inline-block w-[3px] h-[0.8em] bg-ink ml-1 align-baseline animate-pulse" />
+            )}
           </h2>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <p className="font-body text-base md:text-lg text-ink-light leading-relaxed max-w-md">
-              A personal research assistant that reads books, papers, and
+              a personal research assistant that reads books, papers, and
               lectures — then writes you original long-form essays with real
-              sources. Not summaries. Real writing.
+              sources. not summaries. real writing.
             </p>
             <div className="flex items-center gap-6 shrink-0">
               <Link
@@ -119,7 +153,7 @@ export default function LandingPage() {
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
                 5–8 minute reads with original arguments, not regurgitated
-                content. Each essay has a thesis, sources, and a point of view.
+                content. each essay has a thesis, sources, and a point of view.
               </p>
             </div>
             <div className="px-0 md:px-8 md:border-r md:border-rule-light py-8 md:py-0 border-t md:border-t-0 border-rule-light">
@@ -127,7 +161,7 @@ export default function LandingPage() {
                 curated links
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
-                The best writing from across the web on your topics — summarized
+                the best writing from across the web on your topics — summarized
                 so you know what&apos;s worth your time before you click.
               </p>
             </div>
@@ -136,8 +170,8 @@ export default function LandingPage() {
                 your growing library
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
-                Every edition is saved and searchable. Bookmark what resonates.
-                Build an intellectual archive that&apos;s uniquely yours.
+                every edition is saved and searchable. bookmark what resonates.
+                build an intellectual archive that&apos;s uniquely yours.
               </p>
             </div>
           </div>
@@ -156,7 +190,7 @@ export default function LandingPage() {
                   <div className="envelope-fold absolute -top-6 left-0 right-0" />
                 )}
                 <div className="flex gap-6 items-start">
-                  <span className="font-headline text-6xl italic opacity-[0.12] leading-none select-none shrink-0 -mt-2">
+                  <span className="font-logo text-6xl italic opacity-[0.15] leading-none select-none shrink-0 -mt-2">
                     {step.num}
                   </span>
                   <div>
@@ -179,7 +213,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 py-20">
           <p className="section-label mb-3">topics people explore</p>
           <p className="font-body text-sm text-ink-muted mb-10">
-            Choose from dozens of domains, or write your own.
+            choose from dozens of domains, or write your own.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 px-4 pb-20 max-w-5xl mx-auto">
@@ -222,7 +256,7 @@ export default function LandingPage() {
                 8 min read
               </span>
             </div>
-            <h3 className="font-headline text-3xl md:text-4xl lg:text-5xl italic ink-bleed-heavy leading-[1.05] mb-4">
+            <h3 className="font-headline text-3xl md:text-4xl italic ink-bleed-heavy leading-[1.05] mb-4">
               the archaeology of attention
             </h3>
             <p className="font-body text-sm text-ink-muted italic mb-8">
@@ -231,13 +265,13 @@ export default function LandingPage() {
             <div className="envelope-fold mb-8" />
             <p className="font-body text-[15px] md:text-base leading-[1.85] text-ink-light">
               <span className="font-headline text-[3.2rem] leading-none float-left mr-3 mt-1 italic">
-                I
+                i
               </span>
-              n the sixth century, Benedictine monks developed a radical
-              technology for managing attention. They called it the{" "}
+              n the sixth century, benedictine monks developed a radical
+              technology for managing attention. they called it the{" "}
               <em>horarium</em> — a strict schedule that divided the day into
-              periods of prayer, work, and contemplation. Every hour had its
-              purpose. Every moment was accounted for...
+              periods of prayer, work, and contemplation. every hour had its
+              purpose. every moment was accounted for...
             </p>
             <p className="font-mono text-[10px] text-ink-muted mt-8 italic">
               — continues for 1,800 words, with 3 sources
@@ -254,7 +288,7 @@ export default function LandingPage() {
             your morning read,<br />tailored to you.
           </h2>
           <p className="font-body text-lg text-ink-light mb-10 max-w-lg mx-auto">
-            Like having a brilliant friend who reads everything and tells you
+            like having a brilliant friend who reads everything and tells you
             the good parts.
           </p>
           <Link
