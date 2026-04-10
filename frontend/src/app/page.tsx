@@ -216,7 +216,7 @@ export default function Home() {
                 <span
                   key={interest.id}
                   className="inline-flex items-center gap-1 font-mono text-[11px] lowercase px-2 py-0.5"
-                  style={{ backgroundColor: tint.bg, color: "rgb(var(--color-ink-light))" }}
+                  style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
                 >
                   {interest.topic}
                   {showTopics && (
@@ -346,28 +346,28 @@ export default function Home() {
             {featuredEssay && (
               <section
                 className="scroll-reveal mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
-                style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg }}
+                style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg, color: "#1a1a1a" }}
               >
                 <div className="rule-double mb-6" />
                 {digest.big_question && (
-                  <p className="font-mono text-[11px] text-ink-muted mb-4">
+                  <p className="font-mono text-[11px] mb-4" style={{ color: "#8a8a8a" }}>
                     -- today&apos;s question
                   </p>
                 )}
                 <Link href={`/essay/${featuredEssay.id}`} className="group block">
-                  <h2 className="font-headline text-3xl md:text-4xl leading-[1.1] mb-4 group-hover:text-ink-light transition-colors italic ink-bleed-heavy max-w-4xl">
+                  <h2 className="font-headline text-3xl md:text-4xl leading-[1.1] mb-4 group-hover:opacity-70 transition-opacity italic ink-bleed-heavy max-w-4xl">
                     {digest.big_question || featuredEssay.title}
                   </h2>
                 </Link>
-                <p className="font-body text-base text-ink-muted italic mb-4 max-w-lg">
+                <p className="font-body text-base italic mb-4 max-w-lg" style={{ color: "#8a8a8a" }}>
                   {featuredEssay.subtitle || featuredEssay.thesis}
                 </p>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-[11px] lowercase px-1.5 py-0.5 border-l-2 border-accent-red pl-2 text-ink-muted">
+                  <span className="font-mono text-[11px] lowercase px-1.5 py-0.5 border-l-2 border-accent-red pl-2" style={{ color: "#8a8a8a" }}>
                     {featuredEssay.topic}
                   </span>
-                  <span className="text-rule-light text-[11px]">&#183;</span>
-                  <span className="font-mono text-[11px] text-ink-muted">
+                  <span className="text-[11px]" style={{ color: "#d4d4d4" }}>&#183;</span>
+                  <span className="font-mono text-[11px]" style={{ color: "#8a8a8a" }}>
                     {featuredEssay.reading_time_minutes} min read
                   </span>
                 </div>

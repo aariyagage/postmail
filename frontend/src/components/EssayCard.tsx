@@ -39,7 +39,7 @@ export default function EssayCard({
       className={wrapperClass}
       style={
         variant === "tinted"
-          ? { backgroundColor: tint.bg }
+          ? { backgroundColor: tint.bg, color: "#1a1a1a" }
           : variant === "bordered"
             ? { borderColor: tint.border }
             : undefined

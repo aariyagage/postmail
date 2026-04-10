@@ -12,7 +12,7 @@ export default function TopicTag({ topic, size = "md" }: TopicTagProps) {
       className={`font-mono lowercase ${
         size === "sm" ? "text-[10px] px-1 py-0.5" : "text-[11px] px-1.5 py-0.5"
       }`}
-      style={{ backgroundColor: tint.bg, color: "rgb(var(--color-ink-light))" }}
+      style={{ backgroundColor: tint.bg, color: "#4a4a4a" }}
     >
       {topic}
     </span>
