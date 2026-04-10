@@ -32,7 +32,7 @@ export default function EssayCard({
       ? "py-5 px-5 group -mx-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
       : variant === "bordered"
         ? "py-5 pl-4 group border-l-2 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-paper-warm/40"
-        : "py-5 group transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-paper-warm/40 hover-accent-border";
+        : "py-5 group transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-paper-warm/40";
 
   return (
     <article

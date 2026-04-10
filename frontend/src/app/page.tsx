@@ -348,7 +348,7 @@ export default function Home() {
                 className="scroll-reveal mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
                 style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg }}
               >
-                <div className="rule-grow visible mb-6" />
+                <div className="rule-double mb-6" />
                 {digest.big_question && (
                   <p className="font-mono text-[11px] text-ink-muted mb-4">
                     -- today&apos;s question
@@ -372,6 +372,20 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="envelope-fold mt-8" />
+              </section>
+            )}
+
+            {/* Pull quote — below featured essay, above columns */}
+            {pullQuote && (
+              <section className="mb-10 max-w-lg md:ml-[10%] scroll-reveal">
+                <blockquote className="font-headline text-xl italic leading-snug text-ink border-l-4 pl-5 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
+                  &ldquo;{pullQuote.trim()}&rdquo;
+                </blockquote>
+                {featuredEssay && (
+                  <p className="font-mono text-[11px] text-ink-muted mt-2 pl-5">
+                    — from &ldquo;{featuredEssay.title}&rdquo;
+                  </p>
+                )}
               </section>
             )}
 
@@ -406,20 +420,6 @@ export default function Home() {
               {/* Sidebar */}
               <aside className="md:w-[280px] lg:w-[320px] shrink-0">
                 <div className="md:sticky md:top-24 space-y-10">
-                  {/* Pull quote */}
-                  {pullQuote && (
-                    <div className="scroll-reveal">
-                      <blockquote className="font-headline text-lg italic leading-snug text-ink border-l-3 pl-4 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
-                        &ldquo;{pullQuote.trim()}&rdquo;
-                      </blockquote>
-                      {featuredEssay && (
-                        <p className="font-mono text-[10px] text-ink-muted mt-2 pl-4">
-                          — from &ldquo;{featuredEssay.title}&rdquo;
-                        </p>
-                      )}
-                    </div>
-                  )}
-
                   {/* From the Wire */}
                   {digest.articles.length > 0 && (
                     <div className="scroll-reveal dot-grid py-4 px-4 -mx-2 border-t-2 border-accent-blue">
