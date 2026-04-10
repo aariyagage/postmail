@@ -33,7 +33,7 @@ export default function SearchPage() {
   return (
     <PageShell>
         <p className="section-label mb-2">search</p>
-        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-6">search</h1>
+        <h1 className="font-headline text-3xl font-medium ink-bleed-heavy mb-6">search</h1>
 
         <div className="flex items-center gap-3 mb-8">
           <input
@@ -110,7 +110,7 @@ export default function SearchPage() {
                       </span>
                     )}
                   </div>
-                  <h3 className="font-headline text-base leading-snug group-hover:text-ink-light transition-colors italic ink-bleed">
+                  <h3 className="font-headline text-base leading-snug group-hover:text-ink-light transition-colors font-medium ink-bleed">
                     {r.title}
                   </h3>
                   {r.subtitle && (

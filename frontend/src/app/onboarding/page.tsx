@@ -181,7 +181,7 @@ export default function OnboardingPage() {
               P
             </span>
             <div className="text-center mb-10">
-              <h1 className="font-headline text-5xl mb-4 italic ink-bleed-heavy">
+              <h1 className="font-headline text-5xl mb-4 font-medium ink-bleed-heavy">
                 your morning read,<br />tailored to you
               </h1>
               <p className="font-body text-lg text-ink-light max-w-xl mx-auto">
@@ -298,7 +298,7 @@ export default function OnboardingPage() {
         {step === "interests" && (
           <>
             <div className="text-center mb-10">
-              <h1 className="font-headline text-4xl mb-3 italic ink-bleed-heavy">
+              <h1 className="font-headline text-4xl mb-3 font-medium ink-bleed-heavy">
                 what fascinates you?
               </h1>
               <p className="font-body text-lg text-ink-light">
@@ -335,7 +335,7 @@ export default function OnboardingPage() {
                       }`}
                     >
                       <div>
-                        <p className="font-headline text-lg italic ink-bleed">
+                        <p className="font-headline text-lg font-medium ink-bleed">
                           {topic}
                         </p>
                         <p className="font-body text-xs text-ink-muted mt-0.5">

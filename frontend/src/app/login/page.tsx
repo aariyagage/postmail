@@ -83,7 +83,7 @@ export default function LoginPage() {
       <Masthead />
       <div className="max-w-3xl mx-auto px-6 py-12">
         <div className="text-center mb-10">
-          <h1 className="font-headline text-5xl mb-4 italic ink-bleed-heavy">
+          <h1 className="font-headline text-5xl mb-4 font-medium ink-bleed-heavy">
             welcome back
           </h1>
           <p className="font-body text-lg text-ink-light max-w-xl mx-auto">

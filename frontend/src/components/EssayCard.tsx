@@ -62,7 +62,7 @@ export default function EssayCard({
       </div>
       <Link href={href} className="block">
         <h2
-          className={`font-headline leading-snug mb-1.5 group-hover:text-ink-light transition-colors italic ink-bleed ${
+          className={`font-headline leading-snug mb-1.5 group-hover:text-ink-light transition-colors font-medium ink-bleed ${
             isQuickRead ? "text-lg" : "text-xl"
           }`}
         >

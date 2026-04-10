@@ -93,13 +93,13 @@ export default function SavedPage() {
   return (
     <PageShell>
         <p className="section-label mb-2">saved</p>
-        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">saved</h1>
+        <h1 className="font-headline text-3xl font-medium ink-bleed-heavy mb-8">saved</h1>
 
         {error && <InlineError message={error} onDismiss={() => setError(null)} />}
 
         {hydrated.length === 0 ? (
           <div className="py-12">
-            <p className="font-headline text-xl italic ink-bleed mb-2">
+            <p className="font-headline text-xl font-medium ink-bleed mb-2">
               your reading list is empty
             </p>
             <p className="font-body text-sm text-ink-muted">

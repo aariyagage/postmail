@@ -118,7 +118,7 @@ export default function EssayPage() {
           )}
         </div>
 
-        <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl leading-[1.15] text-balance mb-4 italic ink-bleed-heavy">
+        <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl leading-[1.15] text-balance mb-4 font-medium ink-bleed-heavy">
           {essay.title}
         </h1>
 

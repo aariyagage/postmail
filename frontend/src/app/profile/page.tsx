@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
         {/* Identity */}
         <div className="mb-10">
-          <h2 className="font-headline text-3xl italic ink-bleed-heavy mb-1">{user?.name}</h2>
+          <h2 className="font-headline text-3xl font-medium ink-bleed-heavy mb-1">{user?.name}</h2>
           <p className="font-mono text-[11px] text-ink-muted">{user?.email}</p>
         </div>
 

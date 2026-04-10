@@ -116,7 +116,7 @@ export default function LandingPage() {
       {/* ============ HERO ============ */}
       <section>
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-20 w-full">
-          <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl italic ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
+          <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
             {typedText}
             {showCursor && (
               <span className="inline-block w-[3px] h-[0.8em] bg-ink ml-1 align-baseline animate-pulse" />
@@ -155,7 +155,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-0">
             <div className="pr-8 md:border-r md:border-rule-light pb-8 md:pb-0">
-              <p className="font-headline text-2xl italic ink-bleed mb-3">
+              <p className="font-headline text-2xl font-medium ink-bleed mb-3">
                 deep essays
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
@@ -164,7 +164,7 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="px-0 md:px-8 md:border-r md:border-rule-light py-8 md:py-0 border-t md:border-t-0 border-rule-light">
-              <p className="font-headline text-2xl italic ink-bleed mb-3">
+              <p className="font-headline text-2xl font-medium ink-bleed mb-3">
                 curated links
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
@@ -173,7 +173,7 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="pl-0 md:pl-8 pt-8 md:pt-0 border-t md:border-t-0 border-rule-light">
-              <p className="font-headline text-2xl italic ink-bleed mb-3">
+              <p className="font-headline text-2xl font-medium ink-bleed mb-3">
                 your growing library
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
@@ -201,7 +201,7 @@ export default function LandingPage() {
                     {step.num}
                   </span>
                   <div>
-                    <h3 className="font-headline text-lg italic ink-bleed mb-2">
+                    <h3 className="font-headline text-lg font-medium ink-bleed mb-2">
                       {step.title}
                     </h3>
                     <p className="font-body text-sm text-ink-light leading-relaxed">
@@ -263,7 +263,7 @@ export default function LandingPage() {
                 8 min read
               </span>
             </div>
-            <h3 className="font-headline text-3xl md:text-4xl italic ink-bleed-heavy leading-[1.05] mb-4">
+            <h3 className="font-headline text-3xl md:text-4xl font-medium ink-bleed-heavy leading-[1.05] mb-4">
               the archaeology of attention
             </h3>
             <p className="font-body text-sm text-ink-muted italic mb-8">
@@ -291,7 +291,7 @@ export default function LandingPage() {
       {/* ============ CTA ============ */}
       <section>
         <div className="max-w-3xl mx-auto px-6 py-20 text-center">
-          <h2 className="font-headline text-4xl md:text-5xl italic ink-bleed-heavy mb-6 leading-tight">
+          <h2 className="font-headline text-4xl md:text-5xl font-medium ink-bleed-heavy mb-6 leading-tight">
             your morning read,<br />tailored to you.
           </h2>
           <p className="font-body text-lg text-ink-light mb-10 max-w-lg mx-auto">

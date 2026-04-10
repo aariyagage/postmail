@@ -67,7 +67,7 @@ export default function LibraryPage() {
   return (
     <PageShell>
         <p className="section-label mb-2">library</p>
-        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">past editions</h1>
+        <h1 className="font-headline text-3xl font-medium ink-bleed-heavy mb-8">past editions</h1>
 
         {error ? (
           <div className="py-12">
@@ -109,7 +109,7 @@ export default function LibraryPage() {
                       {dateStr}
                     </p>
                     {d.headline && (
-                      <h3 className="font-headline text-lg leading-snug group-hover:text-ink-light transition-colors italic ink-bleed">
+                      <h3 className="font-headline text-lg leading-snug group-hover:text-ink-light transition-colors font-medium ink-bleed">
                         {d.headline}
                       </h3>
                     )}

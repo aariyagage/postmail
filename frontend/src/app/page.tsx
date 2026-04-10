@@ -355,7 +355,7 @@ export default function Home() {
                   </p>
                 )}
                 <Link href={`/essay/${featuredEssay.id}`} className="group block">
-                  <h2 className="font-headline text-3xl md:text-4xl leading-[1.1] mb-4 group-hover:opacity-70 transition-opacity italic ink-bleed-heavy max-w-4xl">
+                  <h2 className="font-headline text-3xl md:text-4xl leading-[1.1] mb-4 group-hover:opacity-70 transition-opacity font-medium ink-bleed-heavy max-w-4xl">
                     {digest.big_question || featuredEssay.title}
                   </h2>
                 </Link>

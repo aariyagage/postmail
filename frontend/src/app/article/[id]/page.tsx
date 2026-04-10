@@ -88,7 +88,7 @@ export default function ArticlePage() {
           )}
         </div>
 
-        <h1 className="font-headline text-3xl md:text-4xl leading-[1.15] text-balance mb-5 italic ink-bleed-heavy">
+        <h1 className="font-headline text-3xl md:text-4xl leading-[1.15] text-balance mb-5 font-medium ink-bleed-heavy">
           {article.title}
         </h1>
 
