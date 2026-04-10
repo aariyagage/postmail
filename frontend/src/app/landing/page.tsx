@@ -107,8 +107,8 @@ export default function LandingPage() {
       </header>
 
       {/* ============ HERO ============ */}
-      <section className="min-h-[60vh] flex items-end">
-        <div className="max-w-6xl mx-auto px-6 pb-20 w-full">
+      <section>
+        <div className="max-w-6xl mx-auto px-6 pt-16 pb-20 w-full">
           <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl italic ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
             {typedText}
             {showCursor && (
