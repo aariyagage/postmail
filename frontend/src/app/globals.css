@@ -333,7 +333,7 @@
   }
 
   .postage-stamp-value {
-    font-family: var(--font-playfair);
+    font-family: var(--font-logo);
     font-size: 18px;
     font-style: italic;
     color: #3a2a1a;

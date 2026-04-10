@@ -196,7 +196,7 @@ export default function Home() {
         {/* Edition header */}
         <div className="rule-double mb-4" />
         <div className="flex items-baseline justify-between mb-2">
-          <p className="font-headline text-xl italic ink-bleed">today&apos;s edition</p>
+          <p className="font-logo text-xl italic ink-bleed">today&apos;s edition</p>
           <p className="font-mono text-[11px] text-ink-muted">
             {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
           </p>
@@ -379,7 +379,7 @@ export default function Home() {
             {pullQuote && (
               <section className="mb-10 max-w-lg md:ml-[10%] scroll-reveal">
                 <blockquote className="font-headline text-xl italic leading-snug text-ink border-l-4 pl-5 ink-bleed" style={{ borderColor: featuredEssay ? getTopicTint(featuredEssay.topic).border : "#1a1a1a" }}>
-                  &ldquo;{pullQuote.trim()}&rdquo;
+                  <span className="font-logo text-3xl leading-none">&ldquo;</span>{pullQuote.trim()}<span className="font-logo text-3xl leading-none">&rdquo;</span>
                 </blockquote>
                 {featuredEssay && (
                   <p className="font-mono text-[11px] text-ink-muted mt-2 pl-5">
