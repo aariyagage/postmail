@@ -67,7 +67,7 @@ export default function LibraryPage() {
   return (
     <PageShell>
         <p className="section-label mb-2">library</p>
-        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">Past Editions</h1>
+        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-8">past editions</h1>
 
         {error ? (
           <div className="py-12">

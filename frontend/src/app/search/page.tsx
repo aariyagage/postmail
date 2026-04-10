@@ -33,7 +33,7 @@ export default function SearchPage() {
   return (
     <PageShell>
         <p className="section-label mb-2">search</p>
-        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-6">Search</h1>
+        <h1 className="font-headline text-3xl italic ink-bleed-heavy mb-6">search</h1>
 
         <div className="flex items-center gap-3 mb-8">
           <input

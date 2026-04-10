@@ -196,7 +196,7 @@ export default function Home() {
         {/* Edition header */}
         <div className="rule-double mb-4" />
         <div className="flex items-baseline justify-between mb-2">
-          <p className="font-headline text-xl italic ink-bleed">Today&apos;s Edition</p>
+          <p className="font-headline text-xl italic ink-bleed">today&apos;s edition</p>
           <p className="font-mono text-[11px] text-ink-muted">
             {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
           </p>
@@ -300,7 +300,7 @@ export default function Home() {
               -- nothing here yet
             </p>
             <h2 className="font-headline text-2xl mb-3">
-              Your digest is being written
+              your digest is being written
             </h2>
             <p className="font-body text-sm text-ink-muted mb-6 leading-relaxed">
               We&apos;re researching and writing essays on your topics.

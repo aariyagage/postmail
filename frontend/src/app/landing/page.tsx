@@ -20,22 +20,22 @@ const SAMPLE_TOPICS = [
 const STEPS = [
   {
     num: "01",
-    title: "Choose your curiosities",
+    title: "choose your curiosities",
     desc: "Pick 3\u20137 topics that fascinate you. Anything from quantum mechanics to political philosophy.",
   },
   {
     num: "02",
-    title: "We research overnight",
+    title: "we research overnight",
     desc: "Our AI pipeline scours books, papers, lectures, and podcasts \u2014 assembling a research dossier on each topic.",
   },
   {
     num: "03",
-    title: "Original essays, written for you",
+    title: "original essays, written for you",
     desc: "Every morning, a fresh edition lands: long-form essays with real sources, not summaries or listicles.",
   },
   {
     num: "04",
-    title: "Your library grows",
+    title: "your library grows",
     desc: "Every edition is saved. Bookmark what resonates. Search across everything. Watch your intellectual map expand.",
   },
 ];
@@ -51,7 +51,7 @@ export default function LandingPage() {
           <div className="airmail-border mb-4">
             <div className="flex items-baseline justify-between">
               <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl tracking-tight italic ink-bleed-heavy">
-                Postmail
+                postmail
               </h1>
               <nav className="flex gap-5 items-baseline">
                 <Link
@@ -79,7 +79,7 @@ export default function LandingPage() {
       <section className="min-h-[65vh] flex items-end">
         <div className="max-w-6xl mx-auto px-6 pb-20 w-full">
           <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl italic ink-bleed-heavy leading-[0.95] mb-10 max-w-5xl">
-            Original essays written for you every morning.
+            original essays written for you every morning.
           </h2>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <p className="font-body text-base md:text-lg text-ink-light leading-relaxed max-w-md">
@@ -115,7 +115,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-0">
             <div className="pr-8 md:border-r md:border-rule-light pb-8 md:pb-0">
               <p className="font-headline text-2xl italic ink-bleed mb-3">
-                Deep essays
+                deep essays
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
                 5–8 minute reads with original arguments, not regurgitated
@@ -124,7 +124,7 @@ export default function LandingPage() {
             </div>
             <div className="px-0 md:px-8 md:border-r md:border-rule-light py-8 md:py-0 border-t md:border-t-0 border-rule-light">
               <p className="font-headline text-2xl italic ink-bleed mb-3">
-                Curated links
+                curated links
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
                 The best writing from across the web on your topics — summarized
@@ -133,7 +133,7 @@ export default function LandingPage() {
             </div>
             <div className="pl-0 md:pl-8 pt-8 md:pt-0 border-t md:border-t-0 border-rule-light">
               <p className="font-headline text-2xl italic ink-bleed mb-3">
-                Your growing library
+                your growing library
               </p>
               <p className="font-body text-sm text-ink-light leading-relaxed">
                 Every edition is saved and searchable. Bookmark what resonates.
@@ -223,10 +223,10 @@ export default function LandingPage() {
               </span>
             </div>
             <h3 className="font-headline text-3xl md:text-4xl lg:text-5xl italic ink-bleed-heavy leading-[1.05] mb-4">
-              The Archaeology of Attention
+              the archaeology of attention
             </h3>
             <p className="font-body text-sm text-ink-muted italic mb-8">
-              How our ancestors focused — and what we lost along the way
+              how our ancestors focused — and what we lost along the way
             </p>
             <div className="envelope-fold mb-8" />
             <p className="font-body text-[15px] md:text-base leading-[1.85] text-ink-light">
@@ -251,7 +251,7 @@ export default function LandingPage() {
       <section>
         <div className="max-w-3xl mx-auto px-6 py-20 text-center">
           <h2 className="font-headline text-4xl md:text-5xl italic ink-bleed-heavy mb-6 leading-tight">
-            Your morning read,<br />tailored to you.
+            your morning read,<br />tailored to you.
           </h2>
           <p className="font-body text-lg text-ink-light mb-10 max-w-lg mx-auto">
             Like having a brilliant friend who reads everything and tells you
@@ -270,7 +270,7 @@ export default function LandingPage() {
       {/* ============ FOOTER ============ */}
       <footer className="airmail-border">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <p className="font-headline text-lg italic ink-bleed">Postmail</p>
+          <p className="font-headline text-lg italic ink-bleed">postmail</p>
           <nav className="flex gap-5">
             <Link
               href="/login"

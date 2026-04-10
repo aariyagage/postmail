@@ -44,7 +44,7 @@ export default function Masthead() {
             <div className="flex items-baseline gap-5">
               <Link href="/">
                 <h1 className="font-headline text-5xl md:text-6xl tracking-tight italic ink-bleed-heavy">
-                  Postmail
+                  postmail
                 </h1>
               </Link>
               {mounted && (
