@@ -6,17 +6,19 @@
    THEME VARIABLES — light & dark
    ============================================================ */
 :root {
-  --color-ink: #1a1a1a;
-  --color-ink-light: #4a4a4a;
-  --color-ink-muted: #8a8a8a;
-  --color-paper: #faf9f6;
-  --color-paper-warm: #f5f0e8;
-  --color-paper-cool: #f0f2f5;
-  --color-accent-red: #c41e3a;
-  --color-accent-blue: #1e3a5f;
-  --color-accent-gold: #c4a43e;
-  --color-rule: #1a1a1a;
-  --color-rule-light: #d4d4d4;
+  /* RGB channels for Tailwind opacity support */
+  --color-ink: 26 26 26;
+  --color-ink-light: 74 74 74;
+  --color-ink-muted: 138 138 138;
+  --color-paper: 250 249 246;
+  --color-paper-warm: 245 240 232;
+  --color-paper-cool: 240 242 245;
+  --color-accent-red: 196 30 58;
+  --color-accent-blue: 30 58 95;
+  --color-accent-gold: 196 164 62;
+  --color-rule: 26 26 26;
+  --color-rule-light: 212 212 212;
+  /* Hex values for non-Tailwind usage */
   --color-stamp-bg: #f5f0e8;
   --color-stamp-border: #c4b8a8;
   --color-stamp-value: #3a2a1a;
@@ -30,17 +32,17 @@
 }
 
 .dark {
-  --color-ink: #e8e3db;
-  --color-ink-light: #c4bfb5;
-  --color-ink-muted: #8a857d;
-  --color-paper: #1c1917;
-  --color-paper-warm: #292524;
-  --color-paper-cool: #1f1f23;
-  --color-accent-red: #e85d75;
-  --color-accent-blue: #6b9fd4;
-  --color-accent-gold: #e0c45a;
-  --color-rule: #e8e3db;
-  --color-rule-light: #3d3835;
+  --color-ink: 232 227 219;
+  --color-ink-light: 196 191 181;
+  --color-ink-muted: 138 133 125;
+  --color-paper: 28 25 23;
+  --color-paper-warm: 41 37 36;
+  --color-paper-cool: 31 31 35;
+  --color-accent-red: 232 93 117;
+  --color-accent-blue: 107 159 212;
+  --color-accent-gold: 224 196 90;
+  --color-rule: 232 227 219;
+  --color-rule-light: 61 56 53;
   --color-stamp-bg: #292524;
   --color-stamp-border: #4a4540;
   --color-stamp-value: #e8e3db;
@@ -68,8 +70,8 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: rgb(var(--color-paper));
+    color: rgb(var(--color-ink));
     /* Subtle aged paper texture */
     background-image:
       radial-gradient(ellipse at 15% 10%, rgba(210, 195, 170, 0.15) 0%, transparent 50%),
@@ -92,7 +94,7 @@
 
   input:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid rgb(var(--color-ink));
     outline-offset: 2px;
   }
 }
@@ -153,7 +155,7 @@
 
   /* Dot grid background — journal/graph paper feel */
   .dot-grid {
-    background-image: radial-gradient(circle, var(--color-rule-light) 0.75px, transparent 0.75px);
+    background-image: radial-gradient(circle, rgb(var(--color-rule-light)) 0.75px, transparent 0.75px);
     background-size: 20px 20px;
   }
 
@@ -162,8 +164,8 @@
     background-image: repeating-linear-gradient(
       transparent,
       transparent 27px,
-      var(--color-rule-light) 27px,
-      var(--color-rule-light) 28px
+      rgb(var(--color-rule-light)) 27px,
+      rgb(var(--color-rule-light)) 28px
     );
   }
 
@@ -201,7 +203,7 @@
     left: 0;
     width: 0;
     height: 1px;
-    background-color: var(--color-ink);
+    background-color: rgb(var(--color-ink));
     transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -232,7 +234,7 @@
     left: 50%;
     width: 0;
     height: 0;
-    background: var(--color-ink-light);
+    background: rgb(var(--color-ink-light));
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: width 0.4s ease, height 0.4s ease;
@@ -274,18 +276,18 @@
   /* --- Ink bleed effect on headlines --- */
   .ink-bleed {
     text-shadow:
-      0.3px 0 0.4px color-mix(in srgb, var(--color-ink) calc(var(--ink-bleed-alpha) * 100%), transparent),
-      -0.2px 0 0.3px color-mix(in srgb, var(--color-ink) 8%, transparent),
-      0 0.2px 0.5px color-mix(in srgb, var(--color-ink) 6%, transparent);
+      0.3px 0 0.4px rgb(var(--color-ink) / 0.12),
+      -0.2px 0 0.3px rgb(var(--color-ink) / 0.08),
+      0 0.2px 0.5px rgb(var(--color-ink) / 0.06);
   }
 
   /* Heavier bleed for large display text */
   .ink-bleed-heavy {
     text-shadow:
-      0.5px 0.2px 0.6px color-mix(in srgb, var(--color-ink) calc(var(--ink-bleed-heavy-alpha) * 100%), transparent),
-      -0.3px 0.1px 0.5px color-mix(in srgb, var(--color-ink) 12%, transparent),
-      0 0.3px 0.8px color-mix(in srgb, var(--color-ink) 8%, transparent),
-      0.2px -0.1px 0.3px color-mix(in srgb, var(--color-ink) 6%, transparent);
+      0.5px 0.2px 0.6px rgb(var(--color-ink) / 0.18),
+      -0.3px 0.1px 0.5px rgb(var(--color-ink) / 0.12),
+      0 0.3px 0.8px rgb(var(--color-ink) / 0.08),
+      0.2px -0.1px 0.3px rgb(var(--color-ink) / 0.06);
   }
 
   /* --- Wax seal — CSS-only circular seal for topic badges --- */
@@ -533,7 +535,7 @@
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: var(--color-ink-muted);
+  color: rgb(var(--color-ink-muted));
   display: block;
   margin-bottom: 1rem;
 }
@@ -543,7 +545,7 @@
   font-size: 1.35rem;
   line-height: 1.6;
   font-style: italic;
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
   text-wrap: balance;
   text-shadow:
     0.4px 0.1px 0.5px rgba(26, 26, 26, 0.15),
@@ -658,7 +660,7 @@
   font-family: var(--font-playfair);
   font-size: 1.5rem;
   line-height: 1.3;
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
   font-style: italic;
   text-wrap: balance;
   text-shadow:
@@ -687,7 +689,7 @@
   font-size: 1.5rem;
   line-height: 1.5;
   font-style: italic;
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
   text-wrap: balance;
   margin: 0;
   text-shadow:
@@ -738,7 +740,7 @@
   font-family: var(--font-source-serif);
   font-size: 1rem;
   line-height: 1.85;
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
 }
 
 .cinematic-prose p {
@@ -753,7 +755,7 @@
   margin-right: 0.5rem;
   margin-top: 0.15rem;
   line-height: 1;
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
 }
 
 .cinematic-prose h3 {
@@ -765,14 +767,14 @@
 }
 
 .cinematic-prose a {
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
   text-decoration: underline;
   text-decoration-style: dashed;
   text-underline-offset: 3px;
 }
 
 .cinematic-prose a:hover {
-  color: var(--color-ink-light);
+  color: rgb(var(--color-ink-light));
 }
 
 .cinematic-prose blockquote {
@@ -783,7 +785,7 @@
   padding-left: 1.25rem;
   margin: 1.5rem 0;
   border-left: 2px solid var(--pull-quote-color, #1a1a1a);
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
 }
 
 .cinematic-prose strong {
@@ -809,7 +811,7 @@
 }
 
 .cinematic-prose li::marker {
-  color: var(--color-ink-muted);
+  color: rgb(var(--color-ink-muted));
 }
 
 /* Only drop-cap the very first section's first paragraph */
@@ -839,7 +841,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.15em;
-  color: var(--color-ink-muted);
+  color: rgb(var(--color-ink-muted));
   text-transform: lowercase;
   white-space: nowrap;
 }
@@ -869,7 +871,7 @@
   gap: 0.35rem;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--color-ink-muted);
+  color: rgb(var(--color-ink-muted));
 }
 
 .cinematic-source-type {
@@ -879,18 +881,18 @@
 }
 
 .cinematic-source-title {
-  color: var(--color-ink-light);
+  color: rgb(var(--color-ink-light));
   text-decoration: underline;
   text-decoration-style: dashed;
   text-underline-offset: 2px;
 }
 
 .cinematic-source-title:hover {
-  color: var(--color-ink);
+  color: rgb(var(--color-ink));
 }
 
 .cinematic-source-author {
-  color: var(--color-ink-muted);
+  color: rgb(var(--color-ink-muted));
 }
 
 /* ============================================================

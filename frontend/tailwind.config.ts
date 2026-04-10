@@ -29,19 +29,19 @@ const config: Config = {
       },
       colors: {
         ink: {
-          DEFAULT: "var(--color-ink)",
-          light: "var(--color-ink-light)",
-          muted: "var(--color-ink-muted)",
+          DEFAULT: "rgb(var(--color-ink) / <alpha-value>)",
+          light: "rgb(var(--color-ink-light) / <alpha-value>)",
+          muted: "rgb(var(--color-ink-muted) / <alpha-value>)",
         },
         paper: {
-          DEFAULT: "var(--color-paper)",
-          warm: "var(--color-paper-warm)",
-          cool: "var(--color-paper-cool)",
+          DEFAULT: "rgb(var(--color-paper) / <alpha-value>)",
+          warm: "rgb(var(--color-paper-warm) / <alpha-value>)",
+          cool: "rgb(var(--color-paper-cool) / <alpha-value>)",
         },
         accent: {
-          red: "var(--color-accent-red)",
-          blue: "var(--color-accent-blue)",
-          gold: "var(--color-accent-gold)",
+          red: "rgb(var(--color-accent-red) / <alpha-value>)",
+          blue: "rgb(var(--color-accent-blue) / <alpha-value>)",
+          gold: "rgb(var(--color-accent-gold) / <alpha-value>)",
         },
         tint: {
           rose: "#f0ddd8",
@@ -54,8 +54,8 @@ const config: Config = {
           mint: "#d8ede6",
         },
         rule: {
-          DEFAULT: "var(--color-rule)",
-          light: "var(--color-rule-light)",
+          DEFAULT: "rgb(var(--color-rule) / <alpha-value>)",
+          light: "rgb(var(--color-rule-light) / <alpha-value>)",
         },
       },
       boxShadow: {

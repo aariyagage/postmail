@@ -6,7 +6,7 @@ interface ReadingProgressProps {
   color?: string;
 }
 
-export default function ReadingProgress({ color = "var(--color-ink)" }: ReadingProgressProps) {
+export default function ReadingProgress({ color = "rgb(var(--color-ink))" }: ReadingProgressProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
