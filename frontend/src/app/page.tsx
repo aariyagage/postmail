@@ -194,7 +194,7 @@ export default function Home() {
       <Masthead />
       <div className="max-w-6xl mx-auto px-6">
         {/* Edition header */}
-        <div className="rule-double mb-4" />
+
         <div className="flex items-baseline justify-between mb-2">
           <p className="font-logo text-xl italic ink-bleed">today&apos;s edition</p>
           <p className="font-mono text-[11px] text-ink-muted">
@@ -348,7 +348,7 @@ export default function Home() {
                 className="scroll-reveal mb-12 mx-[-1.5rem] md:mx-[-3rem] px-8 md:px-12 py-10"
                 style={{ backgroundColor: getTopicTint(featuredEssay.topic).bg, color: "#1a1a1a" }}
               >
-                <div className="rule-double mb-6" />
+
                 {digest.big_question && (
                   <p className="font-mono text-[11px] mb-4" style={{ color: "#8a8a8a" }}>
                     -- today&apos;s question

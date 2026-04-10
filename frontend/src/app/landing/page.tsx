@@ -150,7 +150,7 @@ export default function LandingPage() {
       {/* ============ WHAT YOU GET ============ */}
       <section>
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <div className="rule-double mb-6 border-accent-red" />
+
           <p className="section-label mb-10">what arrives in your digest</p>
 
           <div className="grid md:grid-cols-3 gap-0">
@@ -251,7 +251,7 @@ export default function LandingPage() {
       {/* ============ SAMPLE ESSAY PREVIEW ============ */}
       <section>
         <div className="max-w-3xl mx-auto px-6 py-20">
-          <div className="rule-double mb-8" />
+
           <p className="section-label mb-8">a taste of what you&apos;ll read</p>
 
           <div className="bg-paper px-6 md:px-10 py-10 border border-ink">
@@ -284,7 +284,7 @@ export default function LandingPage() {
               — continues for 1,800 words, with 3 sources
             </p>
           </div>
-          <div className="rule-double mt-8" />
+
         </div>
       </section>
 

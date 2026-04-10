@@ -124,7 +124,7 @@ export default function PressroomPage() {
         {/* header block */}
         <div className="mb-12">
           <p className="section-label mb-3">pressroom</p>
-          <div className="rule-double mb-6" />
+
           <h2 className="font-headline text-3xl md:text-4xl text-ink leading-tight mb-3">
             {isComplete
               ? "edition complete."
