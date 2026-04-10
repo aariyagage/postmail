@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Libre_Baskerville, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Inter, Gupter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const libreBaskerville = Libre_Baskerville({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+const gupter = Gupter({
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
@@ -58,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${libreBaskerville.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
+      className={`${gupter.variable} ${sourceSerif.variable} ${inter.variable} ${mono.variable}`}
     >
       <body className="bg-paper text-ink font-body antialiased">
         <Providers>{children}</Providers>
