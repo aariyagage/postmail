@@ -29,8 +29,8 @@ class TestNormalizeConcept:
 
 
 class TestDeduplicateTopics:
-    def _make_topic(self, concept: str) -> tuple[str, dict]:
-        return ("interest", {"concept": concept})
+    def _make_topic(self, topic: str) -> tuple[str, str | None, str, dict]:
+        return ("interest", None, "angle", {"topic": topic})
 
     def test_no_duplicates(self):
         topics = [
@@ -52,12 +52,12 @@ class TestDeduplicateTopics:
 
     def test_empty_concept_skipped(self):
         topics = [
-            ("interest", {"concept": ""}),
+            ("interest", None, "angle", {"topic": ""}),
             self._make_topic("Valid Topic"),
         ]
         result = _deduplicate_topics(topics)
         assert len(result) == 1
-        assert result[0][1]["concept"] == "Valid Topic"
+        assert result[0][3]["topic"] == "Valid Topic"
 
     def test_word_overlap_dedup(self):
         """Topics with >50% word overlap get deduped."""
